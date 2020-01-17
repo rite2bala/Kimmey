@@ -1,2 +1,0 @@
-# Kimmey
-Created with CodeSandbox
