@@ -1,8 +1,24 @@
-import React from "react";
-import "./styles.css";
+import React, { Component } from "react";
 
-export default props =>
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Login from "./scenes/login/Login";
+import HCP from './scenes/HCP/patientNormalForm';
 
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
+export default class extends Component{
+  render() {
+    return (
+      <Router>
+    <Switch>
+                <Route exact path="/" component={Login} />
+                <Route path="/hcp" component={HCP} />   
+                                   
+    </Switch>
+    </Router>
+    )
+       
+  }
+}
