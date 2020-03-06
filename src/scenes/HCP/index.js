@@ -1,5 +1,5 @@
 import React from 'react';
-import PRF from './patientRequestForm';
+import PRF from './patientNormalForm';
 
 
 export default function HCP() {
