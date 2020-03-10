@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+//import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 //import CardMedia from '@material-ui/core/CardMedia';
@@ -11,24 +11,33 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-//import FavoriteIcon from '@material-ui/icons/Favorite';
-//import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { useState } from "react";
 import data from "./data";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
-//changes to be made - check the component called   expansion panel 
-// can be used in PRF as well 
+//changes to be made - check the component called   expansion panel
+// can be used in PRF as well
 
-// can be used instead of 
-
+// can be used instead of
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
-    spacing: 8
+    maxWidth: 445,
+    marginBottom: 15,
+    transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
+    "&:hover": {
+      boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
+      transform: "scale(1.04)"
+    }
+  },
+  paper: {
+    width: "90%",
+    margin: "5%",
+
+    display: "inline-block"
   },
   media: {
     height: 0,
@@ -46,63 +55,121 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  grid: {
+    alignContent: "center",
+    direction: "column",
+    justify: "center",
+    alignItems: "flex-start"
   }
 }));
 
 export default function RecipeReviewCard() {
   const [importedData] = useState(data);
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  var data_filter = importedData.filter(element => element.SNo % 2 == "1");
+  console.log("data_filter :", data_filter);
+  var data_filter2 = importedData.filter(element => element.SNo % 2 == "0");
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const classes = useStyles();
+
+  const [expandedId, setExpandedId] = React.useState(-1);
+
+  const handleExpandClick = i => {
+    setExpandedId(expandedId === i ? false : i);
   };
 
   return (
-    <Paper elevation={3}>
-      {importedData.map(order => (
-        <Card className={classes.root} key={order.id}>
-          <CardHeader
-            avatar={<Avatar />}
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title={order.patientFullName}
-            subheader={order.leukapheresisDate}
-          />
+    <Paper elevation={0} className={classes.paper}>
+      <Grid className={classes.grid} container spacing={3}>
+        <Grid item xs={6}>
+          {data_filter.map((order, i) => (
+            // {importedData.map(order,i)=> (
+            <Card className={classes.root} key={order.SNo}>
+              <CardHeader
+                avatar={<Avatar />}
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title={order.patientFullName}
+                subheader={order.leukapheresisDate}
+              />
+              <CardContent>
+                <Typography variant="body1" color="textSecondary" component="p">
+                  Order: {order.SNo}, Age: {order.patientAge}, Weight:{" "}
+                  {order.patientWeight}
+                </Typography>
+              </CardContent>
 
-          <CardContent>
-            <Typography variant="body1" color="textSecondary" component="p">
-              Age: {order.patientAge}, Weight: {order.patientWeight}
-            </Typography>
-          </CardContent>
+              <CardActions disableSpacing>
+                <IconButton
+                  onClick={() => handleExpandClick(i)}
+                  aria-expanded={expandedId === i}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+                <CardContent>
+                  {/*  <Typography paragraph>{order.SNo}</Typography>*/}
+                  <Typography paragraph> 4: {order.Molecule}</Typography>
+                  <Typography paragraph> 3: {order.Requests} </Typography>
+                  <Typography paragraph> 2 </Typography>
+                  <Typography>1</Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+          ))}
+        </Grid>
+        <Grid item xs={6}>
+          {data_filter2.map((order, i) => (
+            // {importedData.map(order,i)=> (
+            <Card className={classes.root} key={order.SNo}>
+              <CardHeader
+                avatar={<Avatar />}
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title={order.patientFullName}
+                subheader={order.leukapheresisDate}
+              />
+              <CardContent>
+                <Typography variant="body1" color="textSecondary" component="p">
+                  Order: {order.SNo}, Age: {order.patientAge}, Weight:{" "}
+                  {order.patientWeight}
+                </Typography>
+              </CardContent>
 
-          <CardActions disableSpacing>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-              <Typography paragraph>{order.SNo}</Typography>
-              <Typography paragraph> 4: {order.Molecule}</Typography>
-              <Typography paragraph> 3: {order.Requests} </Typography>
-              <Typography paragraph> 2 </Typography>
-              <Typography>1</Typography>
-            </CardContent>
-            
-          </Collapse>
-        </Card>
-      ))}
+              <CardActions disableSpacing>
+                <IconButton
+                  onClick={() => handleExpandClick(1000 + i)}
+                  aria-expanded={expandedId === 1000 + i}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse
+                in={expandedId === 1000 + i}
+                timeout="auto"
+                unmountOnExit
+              >
+                <CardContent>
+                  {/* <Typography paragraph>{order.SNo}</Typography> */}
+                  <Typography paragraph> 4: {order.Molecule}</Typography>
+                  <Typography paragraph> 3: {order.Requests} </Typography>
+                  <Typography paragraph> 2 </Typography>
+                  <Typography>1</Typography>
+                </CardContent>
+              </Collapse>
+            </Card>
+          ))}
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
