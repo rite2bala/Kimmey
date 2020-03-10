@@ -93,11 +93,18 @@ export default function RecipeReviewCard() {
                   </IconButton>
                 }
                 title={order.patientFullName}
-                subheader={order.leukapheresisDate}
               />
               <CardContent>
-                <Typography variant="body1" color="textSecondary" component="p">
-                  Order: {order.SNo}, Age: {order.patientAge}, Weight:{" "}
+                <Typography color="textSecondary" component="p">
+                  <b>Patient ID: </b>
+                  {order.patientIDInHospital}
+                </Typography>
+                <Typography color="textSecondary" component="p">
+                  <b>Leukapheresis Date: </b>
+                  {order.leukapheresisDate}
+                </Typography>
+                <Typography color="textSecondary" component="p">
+                  <b>Age:</b> {order.patientAge}, <b>Weight:</b>
                   {order.patientWeight}
                 </Typography>
               </CardContent>
@@ -114,10 +121,23 @@ export default function RecipeReviewCard() {
               <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
                 <CardContent>
                   {/*  <Typography paragraph>{order.SNo}</Typography>*/}
-                  <Typography paragraph> 4: {order.Molecule}</Typography>
-                  <Typography paragraph> 3: {order.Requests} </Typography>
-                  <Typography paragraph> 2 </Typography>
-                  <Typography>1</Typography>
+                  <Typography paragraph>
+                    <b> Hospital Name :</b> {order.hospitalName}
+                  </Typography>
+                  <Typography paragraph>
+                    <b> Name of Doctor :</b> {order.nameOfHCP}
+                    <br />
+                    <b> Name of Doctor 2:</b> {order.nameOfHCP2}
+                    <br />
+                  </Typography>
+                  <Typography paragraph>
+                    <b> Payer Name:</b> {order.payerName} <br />
+                    <b> Payer Appproval ID:</b> {order.payerApprovalNumber}
+                  </Typography>
+                  <Typography paragraph>
+                    <b> Cryopreserved Leukapheresis Location:</b>{" "}
+                    {order.cryoPreservedLeukapheresisLocation}{" "}
+                  </Typography>
                 </CardContent>
               </Collapse>
             </Card>
@@ -135,12 +155,23 @@ export default function RecipeReviewCard() {
                   </IconButton>
                 }
                 title={order.patientFullName}
-                subheader={order.leukapheresisDate}
               />
               <CardContent>
-                <Typography variant="body1" color="textSecondary" component="p">
-                  Order: {order.SNo}, Age: {order.patientAge}, Weight:{" "}
+                <Typography color="textSecondary" component="p">
+                  <b>Patient ID: </b>
+                  {order.patientIDInHospital}
+                </Typography>
+                <Typography color="textSecondary" component="p">
+                  <b>Leukapheresis Date: </b>
+                  {order.leukapheresisDate}
+                </Typography>
+                <Typography color="textSecondary" component="p">
+                  <b>Age:</b> {order.patientAge}, <b>Weight:</b>
                   {order.patientWeight}
+                </Typography>
+                <Typography color="textSecondary" component="p">
+                  <b>Reinfusion Date: </b>
+                  {order.reinfusionLocation}
                 </Typography>
               </CardContent>
 
@@ -160,10 +191,27 @@ export default function RecipeReviewCard() {
               >
                 <CardContent>
                   {/* <Typography paragraph>{order.SNo}</Typography> */}
-                  <Typography paragraph> 4: {order.Molecule}</Typography>
-                  <Typography paragraph> 3: {order.Requests} </Typography>
-                  <Typography paragraph> 2 </Typography>
-                  <Typography>1</Typography>
+                  <Typography paragraph>
+                    <b> Hospital Name :</b> {order.hospitalName}
+                  </Typography>
+                  <Typography paragraph>
+                    <b> Name of Doctor :</b> {order.nameOfHCP}
+                    <br />
+                    <b> Name of Doctor 2:</b> {order.nameOfHCP2}
+                    <br />
+                  </Typography>
+                  <Typography paragraph>
+                    <b> Payer Name:</b> {order.payerName} <br />
+                    <b> Payer Appproval ID:</b> {order.payerApprovalNumber}
+                  </Typography>
+                  <Typography paragraph>
+                    <b> Cryopreserved Leukapheresis Location:</b>{" "}
+                    {order.cryoPreservedLeukapheresisLocation}{" "}
+                  </Typography>
+
+                  <Typography paragraph>
+                    <b> Reinfusion Location:</b> {order.reinfusionLocation}{" "}
+                  </Typography>
                 </CardContent>
               </Collapse>
             </Card>
