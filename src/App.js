@@ -1,24 +1,17 @@
 import React, { Component } from "react";
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Login from "./scenes/login/Login";
-import HCP from './scenes/HCP/patientNormalForm';
+import HCP from './scenes/HCP/PatientForm/PatientFormComponent';
 
-export default class extends Component{
+class App extends Component {
   render() {
     return (
-      <Router>
-    <Switch>
-                <Route exact path="/" component={Login} />
-                <Route path="/hcp" component={HCP} />   
-                                   
-    </Switch>
-    </Router>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/hcp" component={HCP} />
+      </Switch>
     )
-       
   }
 }
+
+export default App;

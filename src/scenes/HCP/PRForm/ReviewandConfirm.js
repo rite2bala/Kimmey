@@ -2,22 +2,29 @@
 import React, { Component } from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core/';
 
+import useHCPState from './../../../hooks/useHCPState';
 
-export class Confirm extends Component {
+
+export class ReviewConfirm extends Component {
+
+  
 
   render() {
-    const {
-      values: { patientFullName, patientAge, patientWeight, patientIDInHospital, NameOfHCP, NameOfHCP2,hospitalPONumer, HospitalContact,payerName,payerApprovalNumber,leukapheresisLocation,reinfusionDate,reinfusionLocation,leukapheresisDate,cryoPreservedLeukapheresisLocation}
-    } = this.props;
-    return (
+   // const {
+   //   values: { patientFullName, patientAge, patientWeight, patientIDInHospital, NameOfHCP, NameOfHCP2,hospitalPONumer, HospitalContact,payerName,payerApprovalNumber,leukapheresisLocation,reinfusionDate,reinfusionLocation,leukapheresisDate,cryoPreservedLeukapheresisLocation}
+   // } = this.props;
+    console.log("Patient Confirm Value", useHCPState.patientFullName);
 
+    return (
       <React.Fragment>
         <List>
           <h3>Patient Details</h3>
           <ListItem>
-            <ListItemText primary="Patient Full Name" secondary={patientFullName} />
+            <ListItemText primary="Patient Full Name" secondary={useHCPState.patientFullName} />
+            {/* <ListItemText primary="Patient Full Name" secondary="test111" /> */}
+
           </ListItem>
-          <ListItem>
+         {/*  <ListItem>
             <ListItemText primary="Patient Age" secondary={patientAge} />
           </ListItem>
 
@@ -67,7 +74,7 @@ export class Confirm extends Component {
           </ListItem>
           <ListItem>
             <ListItemText primary="Payer Approval Number" secondary={payerApprovalNumber} />
-          </ListItem>
+          </ListItem> */}
           
         </List>
         <br />
@@ -79,4 +86,4 @@ export class Confirm extends Component {
 
 }
 
-export default Confirm;
+export default ReviewConfirm;

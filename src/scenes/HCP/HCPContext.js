@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 
 
-const MapContext = React.createContext([{}, () => { }]);
+const HCPContext = React.createContext([{}, () => { }]);
 
-const MapProvider = (props) => {
+const HCPProvider = (props) => {
 
-    const [state, setStates] = useState({
-        stateFlag: null,
-        inventory_rows: [],
-        map_rows: [],
-    
+    const [state, setStates] = useState({    
         patientFullName: '',
         patientAge: '',
         patinetWeight:'',
@@ -31,11 +27,11 @@ const MapProvider = (props) => {
     });
 
     return (
-        <MapContext.Provider value={[state, setStates]}>
+        <HCPContext.Provider value={[state, setStates]}>
             {props.children}
-        </MapContext.Provider>
+        </HCPContext.Provider>
     );
 };
 
 
-export { MapContext, MapProvider };
+export { HCPContext, HCPProvider };

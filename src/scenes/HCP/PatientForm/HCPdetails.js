@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default function Patientform() {
+export default function HCPForm() {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
