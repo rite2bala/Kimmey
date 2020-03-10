@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Patientform() {
+export default function PayerDetails() {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({

@@ -8,12 +8,17 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Container from "@material-ui/core/Container";
+//import { ThemeProvider } from '@material-ui/styles';
 
-import HCPDetails from './HCPdetails'
-import PayerDetails from './PayerDetails'
-import ReviewAndConfirm from './ReviewandConfirm'
-import SuccessfulSubmit from './successfulSubmit'
+
+//import HCPDetails from './HCPdetails'
+//import PayerDetails from './PayerDetails'
+import ReviewConfirm from './ReviewandConfirm'
+//import SuccessfulSubmit from './successfulSubmit'
 import PatientDetails from './PatientDetails'
+import { HCPProvider } from '../../../HCPContext';
+//import useHCPState from './../../../hooks/useHCPState';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -36,21 +41,25 @@ const useStyles = makeStyles(theme => ({
 
 
 function getSteps() {
-  return ['Patient Details', 'HCP & Kymriah Schedule Details', 'Insurer and payment details', 'Review before submit', 'Successful Submit'];
+  return ['Patient Details', 'Schedule Details', 'Insurer and payment details', 'Review', 'Submit'];
 }
 
+//function getStepContent(step, handleChange, values) {
+function getStepContent(step) {
 
-
-function getStepContent(step, handleChange, values) {
   switch (step) {
     case 0:
-      return <PatientDetails handleChange={handleChange} values={values}/>
-    case 1:
-      return <HCPDetails  handleChange={handleChange} values={values} />
+      //return <PatientDetails handleChange={handleChange} values={values}/>
+      return <PatientDetails />
+    /* case 1:
+      //return <HCPDetails  handleChange={handleChange} values={values} />
+      return <HCPDetails  />
     case 2:
-      return <PayerDetails  handleChange={handleChange} values={values}/>
+      //return <PayerDetails  handleChange={handleChange} values={values}/>
+      return <PayerDetails  /> */
     case 3:
-      return <ReviewAndConfirm handleChange={handleChange} values={values}/>
+      //return <ReviewAndConfirm handleChange={handleChange} values={values}/>
+      return <ReviewConfirm />
     case 4:
       return  ( <div>
         <h1>Thank You For Your Submission</h1>
@@ -62,34 +71,35 @@ function getStepContent(step, handleChange, values) {
   }
 }
 
-export default function VerticalLinearStepper() {
+export default function PatientRequestForm() {
   const classes = useStyles();
-
+  /*
   const [values, setValues] = React.useState({
-    patientFullName: '',
-    patientAge: '',
-    patientWeight:'',
-    patientIDinHospital: '',
+    patientFullName: 'wd',
+    patientAge: 'asd',
+    patientWeight:'asd',
+    patientIDinHospital: 'asd',
     
-    nameOfHCP: "",
-    nameOfHCP2: '',
-    hospitalPONumer: '',
-    hospitalContact: "",
-    cityofHCP: "",
+    nameOfHCP: "asd",
+    nameOfHCP2: 'asd',
+    hospitalPONumer: 'asd',
+    hospitalContact: "asd",
+    cityofHCP: "asd",
 
-    leukapheresisDate: '',
-    leukapheresisLocation: '',
-    cryoPreservedLeukapheresisLocation: '',
+    leukapheresisDate: 'asd',
+    leukapheresisLocation: 'asd',
+    cryoPreservedLeukapheresisLocation: 'asd',
     reinfusionLocation: '',
     
     payer_Name: '',
-    payerApprovalNumber: ''});
-
+    payerApprovalNumber: ''});*/
+    /*
     const handleChange = name => event => {
       setValues({ ...values, [name]: event.target.value });
-    };
+    };*/
 
-  
+    //console.log("PatientFullName:", useHCPState.patientFullName);
+
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
@@ -107,13 +117,16 @@ export default function VerticalLinearStepper() {
 
   return (
     <Container>
+      <HCPProvider>
       <div className={classes.root}>
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((label, index) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
               <StepContent>
-                <Typography>{getStepContent(index, handleChange, values)}</Typography>
+                {/* <Typography>{getStepContent(index, handleChange, values)}</Typography> */}
+                {getStepContent(index)}
+
                 <div className={classes.actionsContainer}>
 
                   <Button
@@ -148,7 +161,8 @@ export default function VerticalLinearStepper() {
         )}
         
       </div>
-
+      </HCPProvider>
     </Container>
+
   );
 }

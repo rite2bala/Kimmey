@@ -52,7 +52,7 @@ export default function PatientForm(value, handleChanges ) {
     patinetIDInHospital:"",
   });
 
-  const {setPatientFullName} = useHCPState();
+  const {patientFullName, setPatientFullName} = useHCPState();
 
 
   const handleChange = name => event => {
@@ -63,20 +63,17 @@ export default function PatientForm(value, handleChanges ) {
      }
 
   }
-     // var  values=value
-  //var handleChange =handleChanges();
-  // var data = values;
 
-  //    const { values, handleChange } = this.props;
   return (
     
     <React.Fragment>
-      <CssBaseline />
+    <CssBaseline /> 
       <TextField
         label="Patient Full Name"
         id="patientFullName"
         className={classes.textField}
         onChange={handleChange("patientFullName")}
+        value={patientFullName}
         margin="normal"
       />
       <TextField
@@ -106,7 +103,7 @@ export default function PatientForm(value, handleChanges ) {
         id="patinetIDInHospital"
         margin="normal"
       />
-    <br />
+      <br />
     </React.Fragment>
   );
 }
