@@ -2,6 +2,7 @@ import React, { /*Component */ } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import useHCPState from './../../../hooks/useHCPState';
 
 
 const useStyles = makeStyles(theme => ({
@@ -47,7 +48,6 @@ export default function HCPForm() {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-  
     nameOfHCP: "",
     nameOfHCP2: '',
     hospitalPONumer: '',
@@ -58,120 +58,162 @@ export default function HCPForm() {
     cryoPreservedLeukapheresisLocation: '',
     reinfusionDate: '',
     reinfusionLocation: '',
-
   });
 
+  const { nameOfHCP, setnameOfHCP,
+    nameOfHCP2, setnameOfHCP2,
+    hospitalPONumber, sethospitalPONumber,
+    hospitalContact, sethospitalContact,
+    cityofHCP, setcityofHCP,
+    leukapheresisDate, setleukapheresisDate,
+    setleukapheresisLocation,leukapheresisLocation,
+   
+    cryoPreservedLeukapheresisLocation,setcryoPreservedLeukapheresisLocation
+    ,setreinfusionLocation,reinfusionLocation,
+
+  } = useHCPState();
 
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value });
     console.log("Your data here : ", { name })
+    if (name === "nameOfHCP") {
+      setnameOfHCP(event.target.value);
+    }
+    if (name === "nameOfHCP2") {
+      setnameOfHCP2(event.target.value);
+    }
+    if (name === "hospitalPONumber") {
+      sethospitalPONumber(event.target.value);
+    }
+    if (name === "hospitalContact") {
+      sethospitalContact(event.target.value);
+    }
+    if (name === "cityofHCP") {
+      setcityofHCP(event.target.value);
+    }
+    if (name === "leukapheresisDate") {
+      setleukapheresisDate(event.target.value);
+    }
+    if (name === "leukapheresisLocation") {
+      setleukapheresisLocation(event.target.value);
+    }
+    if (name === "cryoPreservedLeukapheresisLocation") {
+      setcryoPreservedLeukapheresisLocation(event.target.value);
+    }
+    if (name === "reinfusionLocation") {
+      setreinfusionLocation(event.target.value);
+    }
+    if (name === "leukapheresisDate") {
+      setleukapheresisDate(event.target.value);
+    }
   };
-//  var data = values;
 
-  //    const { values, handleChange } = this.props;
+
   return (
 
     <React.Fragment>
       <CssBaseline />
-
-
-
       <TextField
-        label="HCP 1 Name"
+        label="HCP1 Name"
         id="nameOfHCP"
-        placeholder="Name of first Doctor"
         className={classes.textField}
         onChange={handleChange("nameOfHCP")}
+        value={nameOfHCP}
         margin="normal" />
 
       <TextField
-        id="NameOfHCP2"
-        placeholder="Name of second Doctor"
+        id="nameOfHCP2"
         label="Name of second Doctor"
         className={classes.textField}
         onChange={handleChange("nameOfHCP2")}
+        value={nameOfHCP2}
         margin="normal" />
-     <br/>
 
-
+      <br />
       <TextField
+        id='hospitalPONumber'
         className={classes.textField}
-        placeholder="Hospital PO Number"
-        type="string"
         label="Hospital PO Number"
         onChange={handleChange("hospitalPONumber")}
         margin="normal"
-        id='hospitalPONumber'
+        value={hospitalPONumber}
       />
-
       <TextField
-        placeholder="Hospital Contact"
+
         label="Hospital Contact"
         //type="number"
         className={classes.textField}
         onChange={handleChange("hospitalContact")}
         id='hospitalContact'
-        margin="normal" />
-
-      <TextField
-        placeholder="Address of Hospital"
-        label="Address of Hospital"
-        className={classes.textField}
-        onChange={handleChange("AddressOfHCP")}
         margin="normal"
-        id='AddressOfHCP' />
+        value={hospitalContact}
+      />
 
+      <TextField
+        label="City of Hospital"
+        className={classes.textField}
+        onChange={handleChange("cityofHCP")}
+        margin="normal"
+        id="cityofHCP"
+        value={cityofHCP}
+      />
       <br />
 
       <br />
       <TextField
-        placeholder="Leukapheresis Date"
         label="Leukapheresis Date"
+        type='date'
         className={classes.textField}
-        onChange={handleChange("LeukapheresisDate")}
+        onChange={handleChange("leukapheresisDate")}
         margin="normal"
-        id="LeukapheresisDate" />
+        id="leukapheresisDate"
+        value={leukapheresisDate}
+        SelectProps={{
+          MenuProps: {
+            className: classes.menu
+          }
+        }}
+        InputLabelProps={{
+          shrink: true
+        }}
+      />
 
       <TextField
-        placeholder="Leukapheresis Location"
-        label="LeukapheresisLocation"
+
+        label="Leukapheresis Location"
         className={classes.textField}
-        onChange={handleChange("LeukapheresisLocation")}
+        onChange={handleChange("leukapheresisLocation")}
         margin="normal"
-        id='LeukapheresisLocation'
+        id='leukapheresisLocation'
+        value={leukapheresisLocation}
       />
 
       <TextField
         placeholder="Cryo Preserved Leukapheresis Location"
         label="Cryo Leukapheresis Location"
         className={classes.textField}
-        onChange={handleChange("CryoPreservedLeukapheresisLocation")}
+        onChange={handleChange("cryoPreservedLeukapheresisLocation")}
         margin="normal"
-        id='CryoPreservedLeukapheresisLocation'
+        id='cryoPreservedLeukapheresisLocation'
         size='medium'
+        value={cryoPreservedLeukapheresisLocation}
       />
       <br />
       <TextField
         placeholder="Reinfusion Location"
         label="Reinfusion Lovation"
         className={classes.textField}
-        onChange={handleChange("ReinfusionLocation")}
+        onChange={handleChange("reinfusionLocation")}
         margin="normal"
-        id='ReinfusionLocation'
+        id='reinfusionLocation'
+        value={reinfusionLocation}
       />
-      <TextField placeholder="Reinfusion Date"
-        label="Reinfusion Date"
-        className={classes.textField}
-        onChange={handleChange("ReinfusionDate")}
-        margin="normal"
-        id='ReinfusionDate'
-      />
-
+      
       <br />
+      
     </React.Fragment>
   );
 }
 
 
-//export default Patientform;

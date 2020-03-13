@@ -1,4 +1,4 @@
-import React, { /*Component */} from 'react';
+import React, { /*Component */ } from 'react';
 //import Dialog from '@material-ui/core/Dialog';
 //import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 //import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
+import useHCPState from './../../../hooks/useHCPState';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -48,47 +49,48 @@ const useStyles = makeStyles(theme => ({
 export default function PayerDetails() {
   const classes = useStyles();
 
-  const [values, setValues] = React.useState({
-    Payer_Name: '',
-    PayerApprovalNumber: '',
-  
-  });
+  const {
+    payerApprovalNumber, setpayerApprovalNumber, payerName, setpayerName } = useHCPState();
 
   const handleChange = name => event => {
-    setValues({ ...values, [name]: event.target.value });
-    console.log("Your data here : ", { name })
+    // setValues({ ...values, [name]: event.target.value });
+    // console.log("Your data here : ", { name })
+    if (name === "payerName") {
+      setpayerName(event.target.value);
+    }
+    if (name === "payerApprovalNumber") {
+      setpayerApprovalNumber(event.target.value);
+    }
   };
-  var data = values;
-
+//  var data = values;
+  
   //    const { values, handleChange } = this.props;
   return (
-   
-      <React.Fragment>
-        <CssBaseline />
-        <TextField
-          label="Payer Name"
-          id="Payer_Name"
-          className={classes.textField}
-          onChange={handleChange("Payer_Name")}
-          margin="normal"
 
-        />
+    <React.Fragment>
+      <CssBaseline />
+      <TextField
+        label="Payer Name"
+        id="payerName"
+        className={classes.textField}
+        onChange={handleChange("payerName")}
+        margin="normal"
+        value={payerName}
+      />
 
-        <TextField          
-          id="PayePayerApprovalNumberrA"
-          placeholder="Optional"
-          label="Payer Approval Number"
-          className={classes.textField}
-          onChange={handleChange("PayerApprovalNumber")}
-          margin="normal"
-        />
+      <TextField
+        id="payerApprovalNumber"
+        placeholder="Optional"
+        label="Payer Approval Number"
+        className={classes.textField}
+        onChange={handleChange("payerApprovalNumber")}
+        margin="normal"
+        value={payerApprovalNumber}
+      />
+      <br />
+    </React.Fragment>
 
-        
-        <br />
-       
-      </React.Fragment>
-   
-   
+
   );
 }
 

@@ -65,7 +65,7 @@ class PatientFormComponent extends Component {
       height: '7%',
       left: '1%',
       width: "98%",
-      
+
     };
 
     const toolBarStyle = {
@@ -96,7 +96,7 @@ class PatientFormComponent extends Component {
     const buttonStyle = {
       width: '100%',
       height: '100%',
-      
+
     };
 
     const logOffIconStyle = {
@@ -129,11 +129,14 @@ class PatientFormComponent extends Component {
       justifyContent: 'center',
     }
 
+
+
     const inputStyle = {
       marginLeft: theme.spacing(5),
       flex: 1,
       color: 'white',
-      fontStyle: 'Open Sans'
+      fontStyle: 'Open Sans',
+
     }
 
     const notificationButtonStyle = {
@@ -157,6 +160,21 @@ class PatientFormComponent extends Component {
       justifyContent: 'center'
     }
 
+      // const inputRoot = {
+      //   color: 'inherit',
+      // }
+    // const inputInput = {
+    //   padding: theme.spacing(1, 1, 1, 7),
+    //   transition: theme.transitions.create('width'),
+    //   width: '100%',
+    //   color: 'white',
+    //   [theme.breakpoints.up('sm')]: {
+    //     width: 120,
+    //     '&:focus': {
+    //       width: 200,
+    //     },
+    //   },
+    // }
 
     let content = null;
     //let menuOption = null;
@@ -186,11 +204,12 @@ class PatientFormComponent extends Component {
           <ThemeProvider theme={theme}>
             <div >
               <AppBar primary="primary" style={appBarStyle}>
+
                 <Toolbar style={toolBarStyle}>
                   <Typography variant="h5">
-                    Kymriah Blockchain App
-              </Typography>
-                  <div style={searchStyle}>
+                    Kymriah - Health Care Practitioner Portal
+                  </Typography>
+                    <div style={searchStyle}>
                     <div style={searchIcon}>
                       <SearchIcon />
                     </div>
@@ -268,29 +287,25 @@ class PatientFormComponent extends Component {
             </div>
             <div >
               <BottomBar style={bottomStyle}>
-                <Toolbar />
+                <Toolbar >
+                  <Typography variant="caption" display="block" gutterBottom>
+                    Copyright © '20 Novartis NTO Blockchain. All rights reserved.
+              </Typography>
+                </Toolbar>
+
               </BottomBar>
             </div>
-{/*             <div style={paperStyle}>
-              <Paper elevation={0}>
-                <Container >
-                  {content}
-                </Container>
-              </Paper>
-            </div> */}
-            
+
             <Paper style={paperStyle} elevation={0}>
-                <Container >
-                  {content}
-                </Container>
+              <Container >
+                {content}
+              </Container>
             </Paper>
           </ThemeProvider>
         </div>
       </HCPProvider>
-
     );
   }
-
 }
 
 export default PatientFormComponent;
