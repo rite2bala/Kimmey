@@ -12,8 +12,9 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap"
   },
   textField: {
+    left : 140,
     fontFamily: '"Fira Sans"',
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(2),
     marginRight: theme.spacing(5),
     width: 200
   },
@@ -42,17 +43,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
 export default function HCPForm() {
   const classes = useStyles();
 
   const [values, setValues] = React.useState({
-    nameOfHCP: "",
+    nameOfHCP: '',
     nameOfHCP2: '',
     hospitalPONumer: '',
-    hospitalContact: "",
-    cityofHCP: "",
+    hospitalContact: '',
+    cityofHCP: '',
+    countryofHCP: '',
     leukapheresisDate: '',
     leukapheresisLocation: '',
     cryoPreservedLeukapheresisLocation: '',
@@ -60,17 +60,18 @@ export default function HCPForm() {
     reinfusionLocation: '',
   });
 
-  const { nameOfHCP, setnameOfHCP,
+  const { 
+    nameOfHCP, setnameOfHCP,
     nameOfHCP2, setnameOfHCP2,
     hospitalPONumber, sethospitalPONumber,
     hospitalContact, sethospitalContact,
-    cityofHCP, setcityofHCP,
+    cityofHCP, setcityofHCP, 
+    countryofHCP, setcountryofHCP,
     leukapheresisDate, setleukapheresisDate,
     setleukapheresisLocation,leukapheresisLocation,
-   
-    cryoPreservedLeukapheresisLocation,setcryoPreservedLeukapheresisLocation
-    ,setreinfusionLocation,reinfusionLocation,
-
+    cryoPreservedLeukapheresisLocation,setcryoPreservedLeukapheresisLocation, 
+    reinfusionDate, setreinfusionDate,
+    reinfusionLocation,setreinfusionLocation,
   } = useHCPState();
 
 
@@ -92,6 +93,9 @@ export default function HCPForm() {
     if (name === "cityofHCP") {
       setcityofHCP(event.target.value);
     }
+    if (name === "countryofHCP") {
+      setcountryofHCP(event.target.value);
+    }
     if (name === "leukapheresisDate") {
       setleukapheresisDate(event.target.value);
     }
@@ -100,6 +104,9 @@ export default function HCPForm() {
     }
     if (name === "cryoPreservedLeukapheresisLocation") {
       setcryoPreservedLeukapheresisLocation(event.target.value);
+    }
+    if (name === "reinfusionDate") {
+      setreinfusionDate(event.target.value);
     }
     if (name === "reinfusionLocation") {
       setreinfusionLocation(event.target.value);
@@ -115,7 +122,7 @@ export default function HCPForm() {
     <React.Fragment>
       <CssBaseline />
       <TextField
-        label="HCP1 Name"
+        label="First HCP Name"
         id="nameOfHCP"
         className={classes.textField}
         onChange={handleChange("nameOfHCP")}
@@ -124,7 +131,7 @@ export default function HCPForm() {
 
       <TextField
         id="nameOfHCP2"
-        label="Name of second Doctor"
+        label="Second HCP Name"
         className={classes.textField}
         onChange={handleChange("nameOfHCP2")}
         value={nameOfHCP2}
@@ -140,7 +147,6 @@ export default function HCPForm() {
         value={hospitalPONumber}
       />
       <TextField
-
         label="Hospital Contact"
         //type="number"
         className={classes.textField}
@@ -149,18 +155,31 @@ export default function HCPForm() {
         margin="normal"
         value={hospitalContact}
       />
-
       <TextField
-        label="City of Hospital"
+        label="City"
         className={classes.textField}
         onChange={handleChange("cityofHCP")}
         margin="normal"
         id="cityofHCP"
         value={cityofHCP}
       />
+      <TextField
+        label="Country"
+        className={classes.textField}
+        onChange={handleChange("countryofHCP")}
+        margin="normal"
+        id="countryofHCP"
+        value={countryofHCP}
+      />
       <br />
-
-      <br />
+      <TextField
+        label="Leukapheresis Location"
+        className={classes.textField}
+        onChange={handleChange("leukapheresisLocation")}
+        margin="normal"
+        id='leukapheresisLocation'
+        value={leukapheresisLocation}
+      />
       <TextField
         label="Leukapheresis Date"
         type='date'
@@ -178,38 +197,43 @@ export default function HCPForm() {
           shrink: true
         }}
       />
-
+    
       <TextField
-
-        label="Leukapheresis Location"
-        className={classes.textField}
-        onChange={handleChange("leukapheresisLocation")}
-        margin="normal"
-        id='leukapheresisLocation'
-        value={leukapheresisLocation}
-      />
-
-      <TextField
-        placeholder="Cryo Preserved Leukapheresis Location"
-        label="Cryo Leukapheresis Location"
+        placeholder="Cryo Preserved Location"
+        label="Cryo Preserved Location"
         className={classes.textField}
         onChange={handleChange("cryoPreservedLeukapheresisLocation")}
         margin="normal"
         id='cryoPreservedLeukapheresisLocation'
-        size='medium'
         value={cryoPreservedLeukapheresisLocation}
       />
       <br />
       <TextField
         placeholder="Reinfusion Location"
-        label="Reinfusion Lovation"
+        label="Reinfusion Location"
         className={classes.textField}
         onChange={handleChange("reinfusionLocation")}
         margin="normal"
         id='reinfusionLocation'
         value={reinfusionLocation}
       />
-      
+      <TextField
+        label="Reinfusion Date"
+        type='date'
+        className={classes.textField}
+        onChange={handleChange("reinfusionDate")}
+        margin="normal"
+        id="reinfusionDate"
+        value={reinfusionDate}
+        SelectProps={{
+          MenuProps: {
+            className: classes.menu
+          }
+        }}
+        InputLabelProps={{
+          shrink: true
+        }}
+      />
       <br />
       
     </React.Fragment>

@@ -99,9 +99,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function RecipeReviewCard() {
   const [importedData] = useState(data);
-  var data_filter = importedData.filter(element => element.SNo % 2 == "1");
+  var data_filter = importedData.filter(element => element.SNo % 2 === "1");
   console.log("data_filter :", data_filter);
-  var data_filter2 = importedData.filter(element => element.SNo % 2 == "0");
+  var data_filter2 = importedData.filter(element => element.SNo % 2 === "0");
 
   const classes = useStyles();
 

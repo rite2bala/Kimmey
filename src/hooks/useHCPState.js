@@ -6,7 +6,7 @@ const useHCPState = () => {
     const [state, setStates] = useContext(HCPContext);
 
     function setPatientFullName(name) {
-        setStates(state => ({ ...state, patientFullName: name }));
+        setStates(state => ({ ...state, patientFullName : name }));
         console.log("UseState Value", state.patientFullName);
     }
 
@@ -17,12 +17,15 @@ const useHCPState = () => {
     function setPatientWeight(weight) {
         setStates(state => ({ ...state, patientWeight: weight }));
     }
+
     function setpatientIDinHospital(hospID) {
         setStates(state => ({ ...state, patientIDinHospital: hospID }));
     }
+
     function setnameOfHCP(HCP) {
         setStates(state => ({ ...state, nameOfHCP: HCP }));
     }
+
     function setnameOfHCP2(HCP2) {
         setStates(state => ({ ...state, nameOfHCP2: HCP2 }));
     }
@@ -30,8 +33,13 @@ const useHCPState = () => {
     function sethospitalContact(contact) {
         setStates(state => ({ ...state, hospitalContact: contact }));
     }
+
     function setcityofHCP(city) {
         setStates(state => ({ ...state, cityofHCP: city }));
+    }
+
+    function setcountryofHCP(country) {
+        setStates(state => ({ ...state, countryofHCP: country }));
     }
     
     function sethospitalPONumber(po) {
@@ -41,21 +49,30 @@ const useHCPState = () => {
     function setleukapheresisDate(leukdate) {
         setStates(state => ({ ...state, leukapheresisDate: leukdate }));
     }
+
     function setleukapheresisLocation(leukLok) {
         setStates(state => ({ ...state, leukapheresisLocation: leukLok }));
     }
+
     function setcryoPreservedLeukapheresisLocation(cryoLoc) {
         setStates(state => ({ ...state, cryoPreservedLeukapheresisLocation: cryoLoc })
         )
     }
+
+    function setreinfusionDate(reinfusiondate) {
+        setStates(state => ({ ...state, reinfusionDate: reinfusiondate }));
+    }
+
     function setreinfusionLocation(reinfloc) {
         setStates(state => ({ ...state, reinfusionLocation: reinfloc })
         )
     }
+
     function setpayerName(payerN) {
         setStates(state => ({ ...state, payerName: payerN })
         )
     }
+
     function setpayerApprovalNumber(payerAp) {
         setStates(state => ({ ...state, payerApprovalNumber: payerAp })
         )
@@ -88,6 +105,9 @@ const useHCPState = () => {
         cityofHCP: state.cityofHCP,
         setcityofHCP,
 
+        countryofHCP: state.countryofHCP,
+        setcountryofHCP,
+
         leukapheresisDate: state.leukapheresisDate,
         setleukapheresisDate,
 
@@ -97,6 +117,9 @@ const useHCPState = () => {
         cryoPreservedLeukapheresisLocation: state.cryoPreservedLeukapheresisLocation,
         setcryoPreservedLeukapheresisLocation,
 
+        reinfusionDate :  state.reinfusionDate,
+        setreinfusionDate,
+
         reinfusionLocation: state.reinfusionLocation,
         setreinfusionLocation,
 
@@ -105,7 +128,6 @@ const useHCPState = () => {
 
         payerApprovalNumber: state.payerApprovalNumber,
         setpayerApprovalNumber,
-        
     }
 };
 

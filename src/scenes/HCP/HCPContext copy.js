@@ -8,12 +8,12 @@ const HCPProvider = (props) => {
     const [state, setStates] = useState({    
         patientFullName: 'Hrishikesh Nashikkar',
         patientAge: '21',
-        patientWeight:'70',
+        patinetWeight:'70',
         patientIDinHospital: 'P101',
-
+        
         nameOfHCP: "Dr. XXX YYYY",
         nameOfHCP2: 'Dr. ZZZ YYYY',
-        hospitalPONumber: 'Hospital_PO100',
+        hospitalPONumer: 'Hospital_PO100',
         hospitalContact: "+1-123-456-7890",
         cityofHCP: "Jersey City",
         countryofHCP: "USA",

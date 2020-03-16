@@ -160,39 +160,18 @@ class PatientFormComponent extends Component {
       justifyContent: 'center'
     }
 
-      // const inputRoot = {
-      //   color: 'inherit',
-      // }
-    // const inputInput = {
-    //   padding: theme.spacing(1, 1, 1, 7),
-    //   transition: theme.transitions.create('width'),
-    //   width: '100%',
-    //   color: 'white',
-    //   [theme.breakpoints.up('sm')]: {
-    //     width: 120,
-    //     '&:focus': {
-    //       width: 200,
-    //     },
-    //   },
-    // }
-
     let content = null;
-    //let menuOption = null;
-
     switch (this.state.show) {
 
       case 'Dashboard':
         content = <Dashboard />;
-        //  menuOption = "MAP Operational Dashboard";
         break;
 
       case 'PatientAppForm':
         content = <PatientAppForm />;
-        // menuOption = "Inventory Capture";
         break;
 
       default:
-        //menuOption = "MAP Operational Dashboard";
         content =
           <ThemeProvider theme={theme}> </ThemeProvider>;
     }
@@ -207,7 +186,7 @@ class PatientFormComponent extends Component {
 
                 <Toolbar style={toolBarStyle}>
                   <Typography variant="h5">
-                    Kymriah - Health Care Practitioner Portal
+                    Health Care Practitioner
                   </Typography>
                     <div style={searchStyle}>
                     <div style={searchIcon}>
