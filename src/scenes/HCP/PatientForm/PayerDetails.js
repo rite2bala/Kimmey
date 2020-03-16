@@ -1,10 +1,6 @@
 import React, { /*Component */ } from 'react';
-//import Dialog from '@material-ui/core/Dialog';
-//import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
-//import Button from '@material-ui/core/Button';
-//import MenuItem from "@material-ui/core/MenuItem";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import useHCPState from './../../../hooks/useHCPState';
@@ -16,6 +12,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap"
   },
   textField: {
+    left:140,
     fontFamily: '"Fira Sans"',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(5),
@@ -53,8 +50,6 @@ export default function PayerDetails() {
     payerApprovalNumber, setpayerApprovalNumber, payerName, setpayerName } = useHCPState();
 
   const handleChange = name => event => {
-    // setValues({ ...values, [name]: event.target.value });
-    // console.log("Your data here : ", { name })
     if (name === "payerName") {
       setpayerName(event.target.value);
     }
@@ -62,11 +57,8 @@ export default function PayerDetails() {
       setpayerApprovalNumber(event.target.value);
     }
   };
-//  var data = values;
-  
-  //    const { values, handleChange } = this.props;
-  return (
 
+  return (
     <React.Fragment>
       <CssBaseline />
       <TextField
@@ -77,7 +69,6 @@ export default function PayerDetails() {
         margin="normal"
         value={payerName}
       />
-
       <TextField
         id="payerApprovalNumber"
         placeholder="Optional"
@@ -89,7 +80,6 @@ export default function PayerDetails() {
       />
       <br />
     </React.Fragment>
-
 
   );
 }

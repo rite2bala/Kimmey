@@ -25,8 +25,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Container from '@material-ui/core/Container';
-import PatientAppForm from './PatientRequestForm';
-import Dashboard from './../Dashboard/HCPDashboard';
+import CSC from './csc/index';
+import Dashboard from './dashboard';
+
+
 
 import { HCPProvider } from '../HCPContext';
 
@@ -42,8 +44,8 @@ class PatientFormComponent extends Component {
   }
   handleToggle = () => this.setState({ open: !this.state.open });
 
-  showPatientAppForm = () => {
-    this.setState({ show: 'PatientAppForm', open: false });
+  showCSCPortal = () => {
+    this.setState({ show: 'CSC', open: false });
   };
 
   showDashboard = () => {
@@ -160,18 +162,39 @@ class PatientFormComponent extends Component {
       justifyContent: 'center'
     }
 
+      // const inputRoot = {
+      //   color: 'inherit',
+      // }
+    // const inputInput = {
+    //   padding: theme.spacing(1, 1, 1, 7),
+    //   transition: theme.transitions.create('width'),
+    //   width: '100%',
+    //   color: 'white',
+    //   [theme.breakpoints.up('sm')]: {
+    //     width: 120,
+    //     '&:focus': {
+    //       width: 200,
+    //     },
+    //   },
+    // }
+
     let content = null;
+    //let menuOption = null;
+
     switch (this.state.show) {
 
       case 'Dashboard':
         content = <Dashboard />;
+        //  menuOption = "MAP Operational Dashboard";
         break;
 
       case 'PatientAppForm':
         content = <PatientAppForm />;
+        // menuOption = "Inventory Capture";
         break;
 
       default:
+        //menuOption = "MAP Operational Dashboard";
         content =
           <ThemeProvider theme={theme}> </ThemeProvider>;
     }
@@ -186,7 +209,7 @@ class PatientFormComponent extends Component {
 
                 <Toolbar style={toolBarStyle}>
                   <Typography variant="h5">
-                    Health Care Practitioner
+                    Kymriah - Health Care Practitioner Portal
                   </Typography>
                     <div style={searchStyle}>
                     <div style={searchIcon}>
@@ -234,7 +257,7 @@ class PatientFormComponent extends Component {
                   <ListItem>
                     <ListItemIcon>
                       <Tooltip TransitionComponent={Zoom} placement="right" title="Patient Application">
-                        <IconButton size="medium" style={buttonStyle} onClick={this.showPatientAppForm}>
+                        <IconButton size="medium" style={buttonStyle} onClick={this.showCSCPortal}>
                           <GroupAddIcon color="secondary" fontSize="large" />
                         </IconButton>
                       </Tooltip>

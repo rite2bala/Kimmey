@@ -9,14 +9,18 @@ import ReviewConfirm from './ReviewConfirmNew';
 import PatientDetails from './PatientDetails';
 import PayerDetails from './PayerDetails';
 import HCPDetails from './HCPdetails';
-//import Drawer from '@material-ui/core/Drawer';
+import useHCPState from './../../../hooks/useHCPState';
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
+    height: '100%'
   },
   button: {
+    top: 50,
+    left: 140,
     marginRight: theme.spacing(1),
   },
   instructions: {
@@ -26,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-  return ['Details of the Patient', 'Details of HCP', 'Details of Payer', 'Review & Submit'];
+  return ['Patient Info', 'HCP Details', 'Payer Details', 'Review & Submit'];
 }
 
 function getStepContent(step) {
@@ -34,7 +38,7 @@ function getStepContent(step) {
     case 0:
       return <PatientDetails />;
     case 1:
-        return <HCPDetails />;
+      return <HCPDetails />;
     case 2:
       return <PayerDetails />;
     case 3:
@@ -49,6 +53,7 @@ export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
+  const data = useHCPState();
 
   // const isStepOptional = step => {
   //   return step === 1;
@@ -67,6 +72,24 @@ export default function HorizontalLinearStepper() {
 
     setActiveStep(prevActiveStep => prevActiveStep + 1);
     setSkipped(newSkipped);
+
+    console.log("Active Step:", activeStep, steps.length);
+
+    if (activeStep === steps.length - 1) {
+
+      console.log("Your data here : ", { data })
+      
+   
+
+      axios.post(`http://localhost:5000/api/patientFormCapture`, { data })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log("exception in the post request of Patient Capture form, ", error.response);
+          alert("Error in Capture");
+        })
+    }
   };
 
   const handleBack = () => {
@@ -92,43 +115,47 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
+
   return (
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep}>
-          {steps.map((label, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            // if (isStepOptional(index)) {
-            //   labelProps.optional = <Typography variant="caption">Optional</Typography>;
-            // }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
-            return (
-              <Step key={label} {...stepProps}>
-                <StepLabel {...labelProps}>{label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-        <div>
-          {activeStep === steps.length ? (
-            <div>
-              <Typography className={classes.instructions}>
-                All steps completed - you&apos;re finished
-              </Typography>
-              <Button onClick={handleReset} className={classes.button}>
-                Reset
+    <div className={classes.root}>
+      <Stepper activeStep={activeStep}>
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const labelProps = {};
+          // if (isStepOptional(index)) {
+          //   labelProps.optional = <Typography variant="caption">Optional</Typography>;
+          // }
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps}>{label}</StepLabel>
+            </Step>
+          );
+        })}
+      </Stepper>
+      <div>
+        {activeStep === steps.length ? (
+          <div>
+            <Typography className={classes.instructions}>
+              Application Submitted !
+                <br />
+              <br />
+              {JSON.stringify(data, 0, 2)}
+
+            </Typography>
+            <Button onClick={handleReset} className={classes.button}>
+              Reset
               </Button>
-            </div>
-          ) : (
+          </div>
+        ) : (
             <div>
               <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
               <div>
                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                   Back
                 </Button>
-
                 <Button
                   variant="contained"
                   color="primary"
@@ -140,7 +167,7 @@ export default function HorizontalLinearStepper() {
               </div>
             </div>
           )}
-        </div>
       </div>
+    </div>
   );
 }

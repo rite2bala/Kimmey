@@ -1,29 +1,28 @@
-import React /*Component */ from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container"
-//import MenuItem from "@material-ui/core/MenuItem";
+//import Container from "@material-ui/core/Container"
 import useHCPState from './../../../hooks/useHCPState';
-
 
 const useStyles = makeStyles(theme => ({
   container: {
     fontFamily: '"Fira Sans"',
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   textField: {
+    left: 110,
     fontFamily: '"Fira Sans"',
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(2),
     marginRight: theme.spacing(5),
-    width: 200
+    width: 300
   },
   textField1: {
-    left: 250,
-    marginLeft: theme.spacing(4),
-    marginRight: theme.spacing(0),
-    width: 300
+    left: 80,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(5),
+    width: 120
   },
   dense: {
     marginTop: 19
@@ -42,23 +41,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-export default function PatientForm(value, handleChanges ) {
+export default function PatientForm(value, handleChanges) {
   const classes = useStyles();
 
-
-  const {patientFullName, setPatientFullName, patientAge, setPatientAge, patientWeight, setPatientWeight,
-    patientIDinHospital,setpatientIDinHospital,
+  const { 
+    patientFullName, setPatientFullName, 
+    patientAge, setPatientAge, 
+    patientWeight, setPatientWeight,
+    patientIDinHospital, setpatientIDinHospital,
   } = useHCPState();
 
-
   const handleChange = name => event => {
-     //setValues({ ...values, [name]: event.target.value });
-     //console.log("Your data here : ", { name }, event.target.value);
-     if (name === "patientFullName") {
-       setPatientFullName(event.target.value);
-     }
-     if (name === "patientAge") {
+    if (name === "patientFullName") {
+      setPatientFullName(event.target.value);
+    }
+    if (name === "patientAge") {
       setPatientAge(event.target.value);
     }
     if (name === "patientWeight") {
@@ -66,52 +63,48 @@ export default function PatientForm(value, handleChanges ) {
     }
     if (name === "patientIDinHospital") {
       setpatientIDinHospital(event.target.value);
-    }  
+    }
   }
 
   return (
-    
     <React.Fragment>
-    <CssBaseline /> 
-    <Container>
-      <TextField
-        label="Patient Full Name"
-        id="patientFullName"
-        className={classes.textField}
-        onChange={handleChange("patientFullName")}
-        value={patientFullName}
-        margin="normal"
-      />
-      <TextField
-       type="number"
-       label="Patient Age"
-       id="patientAge"
-       className={classes.textField}
-       onChange={handleChange("patientAge")}
-       value={patientAge}
-       margin="normal"
-      />
-
-      <TextField
-      type="number"
-      label="Patient Weight"
-      id="patientWeight"
-      className={classes.textField}
-      onChange={handleChange("patientWeight")}
-      value={patientWeight}
-      margin="normal"
-      />
+      <CssBaseline />
         <TextField
-         type="string"
-         label="Patient ID in Hospital"
-         id="patientIDinHospital"
-         className={classes.textField}
-         onChange={handleChange("patientIDinHospital")}
-         value={patientIDinHospital}
-         margin="normal"
-      />
-      <br />
-      </Container>
+          label="Patient Full Name"
+          id="patientFullName"
+          className={classes.textField}
+          onChange={handleChange("patientFullName")}
+          value={patientFullName}
+          margin="normal"
+        />
+        <TextField
+          type="number"
+          label="Patient Age"
+          id="patientAge"
+          className={classes.textField1}
+          onChange={handleChange("patientAge")}
+          value={patientAge}
+          margin="normal"
+        />
+        <TextField
+          type="number"
+          label="Patient Weight"
+          id="patientWeight"
+          className={classes.textField1}
+          onChange={handleChange("patientWeight")}
+          value={patientWeight}
+          margin="normal"
+        />
+        <TextField
+          type="string"
+          label="Patient ID"
+          id="patientIDinHospital"
+          className={classes.textField1}
+          onChange={handleChange("patientIDinHospital")}
+          value={patientIDinHospital}
+          margin="normal"
+        />
+        <br />
     </React.Fragment>
   );
 }

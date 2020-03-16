@@ -60,80 +60,77 @@ export default function ReviewAndConfirm(value, handleChanges) {
     reinfusionLocation, payerName, payerApprovalNumber,
     nameOfHCP, patientIDinHospital, patientAge } = useHCPState();
 
-const values = useHCPState();
+  //const values = useHCPState();
 
   return (
-<React.Fragment>
-  <CssBaseline/>
-    <Paper >
-     
+    <React.Fragment>
+      <CssBaseline />
         <Grid className={classes.grid} container spacing={3}>
-        <Grid item xs={6}>
-          <div>
+          <Grid item xs={4}>
+            <div>
+              <List>
+                <ListItem>
+                  <ListItemText primary="Patient Full Name: " secondary={patientFullName} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Patient Age: " secondary={patientAge} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Patient Weight: " secondary={patientWeight} />
+                </ListItem>
+                <ListItem>
+                  <ListItemText primary="Patient Hospital ID: " secondary={patientIDinHospital} />
+                </ListItem>
+
+              </List>
+            </div>
+          </Grid>
+          <Grid item xs={4}>
             <List>
               <ListItem>
-                <ListItemText primary="Patient Full Name: " secondary={patientFullName} />
+                <ListItemText primary="Name of HCP 1: " secondary={nameOfHCP} />
               </ListItem>
               <ListItem>
-                <ListItemText primary="Patient Age: " secondary={patientAge} />
+                <ListItemText primary="Name of HCP 2: " secondary={nameOfHCP2} />
               </ListItem>
               <ListItem>
-                <ListItemText primary="Patient Weight: " secondary={patientWeight} />
+                <ListItemText primary="Hospital PO Number: " secondary={hospitalPONumber} />
               </ListItem>
               <ListItem>
-                <ListItemText primary="Patient Hospital ID: " secondary={patientIDinHospital} />
+                <ListItemText primary="City of Hospital: " secondary={cityofHCP} />
               </ListItem>
-            
+
+              <ListItem>
+                <ListItemText primary="Contact in hospital: " secondary={hospitalContact} />
+              </ListItem>
             </List>
-          </div>
-        </Grid>
-        <Grid item xs={6}>
-          <List>
-          <ListItem>
-              <ListItemText primary="Name of HCP 1: " secondary={nameOfHCP} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Name of HCP 2: " secondary={nameOfHCP2} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Hospital PO Number: " secondary={hospitalPONumber} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="City of Hospital: " secondary={cityofHCP} />
-            </ListItem>
+          </Grid>
 
-            <ListItem>
-              <ListItemText primary="Contact in hospital: " secondary={hospitalContact} />
-            </ListItem>
-          </List>
-        </Grid>
+          <Grid item xs={4}>
+            <List>
+              <ListItem>
+                <ListItemText primary="Leukapheresis Date: " secondary={leukapheresisDate} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Leukapheresis Location: " secondary={leukapheresisLocation} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Cryo-preserved Leukapheresis Location: " secondary={cryoPreservedLeukapheresisLocation} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Reinfusion Location: " secondary={reinfusionLocation} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="payerName: " secondary={payerName} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Payer Approval Number: " secondary={payerApprovalNumber} />
+              </ListItem>
 
-        <Grid item xs={6}>
-          <List>
-            <ListItem>
-              <ListItemText primary="Leukapheresis Date: " secondary={leukapheresisDate} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Leukapheresis Location: " secondary={leukapheresisLocation} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Cryo-preserved Leukapheresis Location: " secondary={cryoPreservedLeukapheresisLocation} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Reinfusion Location: " secondary={reinfusionLocation} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="payerName: " secondary={payerName} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Payer Approval Number: " secondary={payerApprovalNumber} />
-            </ListItem>
-
-          </List>
+            </List>
+          </Grid>
         </Grid>
-      </Grid>
-    </Paper>
-    <pre>{JSON.stringify(values, 0, 2)}</pre>    
+      {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
     </React.Fragment>
 
   );
