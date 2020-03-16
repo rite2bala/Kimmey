@@ -116,10 +116,11 @@ export default function HorizontalLinearStepper() {
         {activeStep === steps.length ? (
           <div>
             <Typography className={classes.instructions}>
-              Application Submitted !
+              Request for Kymriah is submitted !
+              Please await and track your status updates visible on the home screen
                 <br />
               <br />
-              {JSON.stringify(data, 0, 2)}
+              <pre>{JSON.stringify(data, 0, 2)}</pre>
 
             </Typography>
             <Button onClick={handleReset} className={classes.button}>

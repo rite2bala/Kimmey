@@ -131,25 +131,25 @@ class PatientFormComponent extends Component {
 
     
 
-    const HCP = [
-      { value: "John Hopkins All Childeren's hospital", label: "John Hopkins All Childeren's hospital" },
-      { value: "The University of Kansas Cancer Center", label: "The University of Kansas Cancer Center" },
-      { value: "The Children's Mercy Hospital", label: "The Children's Mercy Hospital" },
-      { value: "Barnes - Jewish Hospital", label: "Barnes - Jewish Hospital" },
-      { value: "Baylor University Medical Center", label: "Baylor University Medical Center" },
-      { value: "Mayo Clinic CAR-T Cell Therapy Program: Rochester", label: "Mayo Clinic CAR-T Cell Therapy Program: Rochester" },
-      { value: "University of Minnesota Masonic Children's Hospital", label: "University of Minnesota Masonic Children's Hospital" },
-      { value: "", label: "" },
+  //   const HCP = [
+  //     { value: "John Hopkins All Childeren's hospital", label: "John Hopkins All Childeren's hospital" },
+  //     { value: "The University of Kansas Cancer Center", label: "The University of Kansas Cancer Center" },
+  //     { value: "The Children's Mercy Hospital", label: "The Children's Mercy Hospital" },
+  //     { value: "Barnes - Jewish Hospital", label: "Barnes - Jewish Hospital" },
+  //     { value: "Baylor University Medical Center", label: "Baylor University Medical Center" },
+  //     { value: "Mayo Clinic CAR-T Cell Therapy Program: Rochester", label: "Mayo Clinic CAR-T Cell Therapy Program: Rochester" },
+  //     { value: "University of Minnesota Masonic Children's Hospital", label: "University of Minnesota Masonic Children's Hospital" },
+  //     { value: "", label: "" },
   
-  ];
+  // ];
   
-  const Payer = [
-      { value: "Aetna", label: "Aetna" },
-      { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
-      { value: "Cigna", label: "Cigna" },
-      { value: "Kaiser Permanente", label: "Kaiser Permanente" },
-      { value: "United Health Group", label: "United Health Group" },
-  ];
+  // const Payer = [
+  //     { value: "Aetna", label: "Aetna" },
+  //     { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
+  //     { value: "Cigna", label: "Cigna" },
+  //     { value: "Kaiser Permanente", label: "Kaiser Permanente" },
+  //     { value: "United Health Group", label: "United Health Group" },
+  // ];
   
     const inputStyle = {
       marginLeft: theme.spacing(5),
