@@ -121,7 +121,7 @@ export default function ReviewAndConfirm(value, handleChanges) {
                 <ListItemText primary="Reinfusion Location: " secondary={reinfusionLocation} />
               </ListItem>
               <ListItem>
-                <ListItemText primary="payerName: " secondary={payerName} />
+                <ListItemText primary="Payer Name: " secondary={payerName} />
               </ListItem>
               <ListItem>
                 <ListItemText primary="Payer Approval Number: " secondary={payerApprovalNumber} />

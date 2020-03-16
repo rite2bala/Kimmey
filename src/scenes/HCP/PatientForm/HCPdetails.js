@@ -1,6 +1,7 @@
 import React, { /*Component */ } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem"
 import CssBaseline from "@material-ui/core/CssBaseline";
 import useHCPState from './../../../hooks/useHCPState';
 
@@ -12,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap"
   },
   textField: {
-    left : 140,
+    left: 140,
     fontFamily: '"Fira Sans"',
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(5),
@@ -46,6 +47,26 @@ const useStyles = makeStyles(theme => ({
 export default function HCPForm() {
   const classes = useStyles();
 
+  const HCPList = [
+    { value: "John Hopkins All Childeren's hospital", label: "John Hopkins All Childeren's hospital" },
+    { value: "The University of Kansas Cancer Center", label: "The University of Kansas Cancer Center" },
+    { value: "The Children's Mercy Hospital", label: "The Children's Mercy Hospital" },
+    { value: "Barnes - Jewish Hospital", label: "Barnes - Jewish Hospital" },
+    { value: "Baylor University Medical Center", label: "Baylor University Medical Center" },
+    { value: "Mayo Clinic CAR-T Cell Therapy Program: Rochester", label: "Mayo Clinic CAR-T Cell Therapy Program: Rochester" },
+    { value: "University of Minnesota Masonic Children's Hospital", label: "University of Minnesota Masonic Children's Hospital" },
+
+
+  ];
+  const CityList = [
+    { value: "Tampa, FL", label: "Tampa, FL" },
+    { value: "Kansas City, Missouri", label: "Kansas City, Missouri" },
+    { value: "St Louis, Missouri", label: "St Louis, Missouri" },
+    { value: "Dallas, Texas", label: "Dallas, Texas" },
+    { value: "Rochester, Minnesota", label: "Rochester, Minnesota" },
+    { value: "Minneapolis, MN", label: "Minneapolis, MN" },
+  ];
+
   const [values, setValues] = React.useState({
     nameOfHCP: '',
     nameOfHCP2: '',
@@ -60,18 +81,18 @@ export default function HCPForm() {
     reinfusionLocation: '',
   });
 
-  const { 
+  const {
     nameOfHCP, setnameOfHCP,
     nameOfHCP2, setnameOfHCP2,
     hospitalPONumber, sethospitalPONumber,
     hospitalContact, sethospitalContact,
-    cityofHCP, setcityofHCP, 
-    countryofHCP, setcountryofHCP,
+    cityofHCP, setcityofHCP,
+     setcountryofHCP,
     leukapheresisDate, setleukapheresisDate,
-    setleukapheresisLocation,leukapheresisLocation,
-    cryoPreservedLeukapheresisLocation,setcryoPreservedLeukapheresisLocation, 
+    setleukapheresisLocation, leukapheresisLocation,
+    cryoPreservedLeukapheresisLocation, setcryoPreservedLeukapheresisLocation,
     reinfusionDate, setreinfusionDate,
-    reinfusionLocation,setreinfusionLocation,
+    reinfusionLocation, setreinfusionLocation,
   } = useHCPState();
 
 
@@ -111,9 +132,7 @@ export default function HCPForm() {
     if (name === "reinfusionLocation") {
       setreinfusionLocation(event.target.value);
     }
-    if (name === "leukapheresisDate") {
-      setleukapheresisDate(event.target.value);
-    }
+  
   };
 
 
@@ -155,6 +174,8 @@ export default function HCPForm() {
         margin="normal"
         value={hospitalContact}
       />
+
+
       <TextField
         label="City"
         className={classes.textField}
@@ -163,23 +184,8 @@ export default function HCPForm() {
         id="cityofHCP"
         value={cityofHCP}
       />
-      <TextField
-        label="Country"
-        className={classes.textField}
-        onChange={handleChange("countryofHCP")}
-        margin="normal"
-        id="countryofHCP"
-        value={countryofHCP}
-      />
+    
       <br />
-      <TextField
-        label="Leukapheresis Location"
-        className={classes.textField}
-        onChange={handleChange("leukapheresisLocation")}
-        margin="normal"
-        id='leukapheresisLocation'
-        value={leukapheresisLocation}
-      />
       <TextField
         label="Leukapheresis Date"
         type='date'
@@ -197,7 +203,33 @@ export default function HCPForm() {
           shrink: true
         }}
       />
-    
+  
+
+      <TextField
+        required
+        label="Leukapheresis Location"
+        id="leukapheresisLocation"
+        select
+
+        className={classes.textField}
+        value={leukapheresisLocation}
+        onChange={handleChange("leukapheresisLocation")}
+        SelectProps={{
+          MenuProps: {
+            className: classes.menu
+          }
+        }}
+
+        margin="normal"
+        required
+      >
+        {HCPList.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+
       <TextField
         placeholder="Cryo Preserved Location"
         label="Cryo Preserved Location"
@@ -207,35 +239,36 @@ export default function HCPForm() {
         id='cryoPreservedLeukapheresisLocation'
         value={cryoPreservedLeukapheresisLocation}
       />
-      <br />
+      
+
       <TextField
-        placeholder="Reinfusion Location"
+        required
         label="Reinfusion Location"
+        id="reinfusionLocation"
+        select
+
         className={classes.textField}
-        onChange={handleChange("reinfusionLocation")}
-        margin="normal"
-        id='reinfusionLocation'
         value={reinfusionLocation}
-      />
-      <TextField
-        label="Reinfusion Date"
-        type='date'
-        className={classes.textField}
-        onChange={handleChange("reinfusionDate")}
-        margin="normal"
-        id="reinfusionDate"
-        value={reinfusionDate}
+        onChange={handleChange("reinfusionLocation")}
         SelectProps={{
           MenuProps: {
             className: classes.menu
           }
         }}
-        InputLabelProps={{
-          shrink: true
-        }}
-      />
-      <br />
+        fullWidth
+        margin="normal"
+        required
+      >
+        {HCPList.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
+
       
+      <br />
+
     </React.Fragment>
   );
 }

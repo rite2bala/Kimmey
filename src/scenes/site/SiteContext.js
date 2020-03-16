@@ -6,9 +6,9 @@ const HCPContext = React.createContext([{}, () => { }]);
 const HCPProvider = (props) => {
 
     const [state, setStates] = useState({    
-        patientFullName: 'Tina Brown',
-        patientAge: '18',
-        patientWeight:'50',
+        patientFullName: 'Hrishikesh Nashikkar',
+        patientAge: '21',
+        patientWeight:'70',
         patientIDinHospital: 'P101',
 
         nameOfHCP: "Dr. XXX YYYY",
@@ -24,7 +24,7 @@ const HCPProvider = (props) => {
         reinfusionDate: '01/02/2020',
         reinfusionLocation: 'HCP, Jersey City',
     
-        payerName: 'Aetna',
+        payerName: 'Optum Health Insurance',
         payerApprovalNumber: 'HN100'
     });
 

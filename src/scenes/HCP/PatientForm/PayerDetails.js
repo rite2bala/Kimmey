@@ -2,6 +2,8 @@ import React, { /*Component */ } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import MenuItem from "@material-ui/core/MenuItem"
+
 
 import useHCPState from './../../../hooks/useHCPState';
 
@@ -49,6 +51,14 @@ export default function PayerDetails() {
   const {
     payerApprovalNumber, setpayerApprovalNumber, payerName, setpayerName } = useHCPState();
 
+    const payerList = [
+      { value: "Aetna", label: "Aetna" },
+      { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
+      { value: "Cigna", label: "Cigna" },
+      { value: "Kaiser Permanente", label: "Kaiser Permanente" },
+      { value: "United Health Group", label: "United Health Group" },
+    ];
+
   const handleChange = name => event => {
     if (name === "payerName") {
       setpayerName(event.target.value);
@@ -62,13 +72,31 @@ export default function PayerDetails() {
     <React.Fragment>
       <CssBaseline />
       <TextField
-        label="Payer Name"
-        id="payerName"
-        className={classes.textField}
-        onChange={handleChange("payerName")}
-        margin="normal"
-        value={payerName}
-      />
+                required
+                label="Payer Name"
+                id="payerName"
+                select
+               
+                className={classes.textField}
+                value={payerName}
+                onChange={handleChange("payerName")}
+                SelectProps={{
+                  MenuProps: {
+                    className: classes.menu
+                  }
+                }}
+                defaultValue="Aetna"
+                margin="normal"
+                required
+              >
+                {payerList.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+
+
       <TextField
         id="payerApprovalNumber"
         placeholder="Optional"
@@ -79,6 +107,7 @@ export default function PayerDetails() {
         value={payerApprovalNumber}
       />
       <br />
+      
     </React.Fragment>
 
   );

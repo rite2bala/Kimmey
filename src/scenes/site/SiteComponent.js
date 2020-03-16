@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider } from '@material-ui/styles';
 import { fade } from '@material-ui/core/styles';
-import theme from './../../../theme';
+import theme from './../../theme';
 import Paper from '@material-ui/core/Paper';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -30,7 +30,7 @@ import Dashboard from './dashboard';
 
 
 
-import { HCPProvider } from '../HCPContext';
+import { HCPProvider } from './SiteContext';
 
 class PatientFormComponent extends Component {
 
@@ -189,7 +189,7 @@ class PatientFormComponent extends Component {
         break;
 
       case 'PatientAppForm':
-        content = <PatientAppForm />;
+        content = <Dashboard />;
         // menuOption = "Inventory Capture";
         break;
 

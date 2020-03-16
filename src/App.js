@@ -10,7 +10,7 @@ class App extends Component {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/hcp" component={HCP} />
-        <Route path="/site" component={Site} />
+        {/* <Route path="/site" component={Site} /> */}
       </Switch>
     )
   }
