@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap"
   },
   textField: {
-    left:140,
+    left: 140,
     fontFamily: '"Fira Sans"',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(5),
@@ -51,13 +51,13 @@ export default function PayerDetails() {
   const {
     payerApprovalNumber, setpayerApprovalNumber, payerName, setpayerName } = useHCPState();
 
-    const payerList = [
-      { value: "Aetna", label: "Aetna" },
-      { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
-      { value: "Cigna", label: "Cigna" },
-      { value: "Kaiser Permanente", label: "Kaiser Permanente" },
-      { value: "United Health Group", label: "United Health Group" },
-    ];
+  const payerList = [
+    { value: "Aetna", label: "Aetna" },
+    { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
+    { value: "Cigna", label: "Cigna" },
+    { value: "Kaiser Permanente", label: "Kaiser Permanente" },
+    { value: "United Health Group", label: "United Health Group" },
+  ];
 
   const handleChange = name => event => {
     if (name === "payerName") {
@@ -72,29 +72,29 @@ export default function PayerDetails() {
     <React.Fragment>
       <CssBaseline />
       <TextField
-                required
-                label="Payer Name"
-                id="payerName"
-                select
-               
-                className={classes.textField}
-                value={payerName}
-                onChange={handleChange("payerName")}
-                SelectProps={{
-                  MenuProps: {
-                    className: classes.menu
-                  }
-                }}
-                defaultValue="Aetna"
-                margin="normal"
-                required
-              >
-                {payerList.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
+        required
+        label="Payer Name"
+        id="payerName"
+        select
+
+        className={classes.textField}
+        value={payerName}
+        onChange={handleChange("payerName")}
+        SelectProps={{
+          MenuProps: {
+            className: classes.menu
+          }
+        }}
+        defaultValue="Aetna"
+        margin="normal"
+        required
+      >
+        {payerList.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </TextField>
 
 
       <TextField
@@ -107,7 +107,7 @@ export default function PayerDetails() {
         value={payerApprovalNumber}
       />
       <br />
-      
+
     </React.Fragment>
 
   );
