@@ -83,15 +83,15 @@ export default function HorizontalLinearStepper() {
     setSkipped(newSkipped);
 
     console.log("Active Step:", activeStep, steps.length);
-    setOpen(true); 
-    
-    if (activeStep === steps.length-1) {
-     axios.post(`http://localhost:5000/api/patientFormCapture`, { data })
+    setOpen(true);
+
+    if (activeStep === steps.length - 1) {
+      axios.post(`http://localhost:5000/api/patientFormCapture`, { data })
         .then(res => {
           console.log(res.data);
           console.log("Your data here : ", { data })
-         // open snackbar to indicate success
-        }) 
+          // open snackbar to indicate success
+        })
         .catch(error => {
           console.log("exception in the post request of Patient Capture form, ", error.response);
           alert("Error in Capture");
@@ -146,11 +146,11 @@ export default function HorizontalLinearStepper() {
             <Button onClick={handleReset} className={classes.button}>
               Reset
               </Button>
-              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                  <Alert onClose={handleClose} severity="success">
-                    Request for Kymriah placed successfully! 
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Request for Kymriah placed successfully!
                  </Alert>
-                </Snackbar>
+            </Snackbar>
           </div>
         ) : (
             <div>
@@ -166,7 +166,7 @@ export default function HorizontalLinearStepper() {
                   className={classes.button}>
                   {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                 </Button>
-             
+
               </div>
             </div>
           )}
