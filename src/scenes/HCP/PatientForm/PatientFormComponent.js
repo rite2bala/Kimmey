@@ -28,6 +28,7 @@ import Container from '@material-ui/core/Container';
 import PatientAppForm from './PatientRequestForm';
 import Dashboard from './../Dashboard/HCPDashboard';
 
+
 import { HCPProvider } from '../HCPContext';
 
 class PatientFormComponent extends Component {
@@ -54,8 +55,8 @@ class PatientFormComponent extends Component {
 
     const paperStyle = {
       marginTop: '6%',
-      marginLeft: '2%',
-      width: '92%',
+      marginLeft: '1%',
+      width: '93%',
       height: '94%',
     };
 
@@ -129,28 +130,28 @@ class PatientFormComponent extends Component {
       justifyContent: 'center',
     }
 
-    
 
-  //   const HCP = [
-  //     { value: "John Hopkins All Childeren's hospital", label: "John Hopkins All Childeren's hospital" },
-  //     { value: "The University of Kansas Cancer Center", label: "The University of Kansas Cancer Center" },
-  //     { value: "The Children's Mercy Hospital", label: "The Children's Mercy Hospital" },
-  //     { value: "Barnes - Jewish Hospital", label: "Barnes - Jewish Hospital" },
-  //     { value: "Baylor University Medical Center", label: "Baylor University Medical Center" },
-  //     { value: "Mayo Clinic CAR-T Cell Therapy Program: Rochester", label: "Mayo Clinic CAR-T Cell Therapy Program: Rochester" },
-  //     { value: "University of Minnesota Masonic Children's Hospital", label: "University of Minnesota Masonic Children's Hospital" },
-  //     { value: "", label: "" },
-  
-  // ];
-  
-  // const Payer = [
-  //     { value: "Aetna", label: "Aetna" },
-  //     { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
-  //     { value: "Cigna", label: "Cigna" },
-  //     { value: "Kaiser Permanente", label: "Kaiser Permanente" },
-  //     { value: "United Health Group", label: "United Health Group" },
-  // ];
-  
+
+    //   const HCP = [
+    //     { value: "John Hopkins All Childeren's hospital", label: "John Hopkins All Childeren's hospital" },
+    //     { value: "The University of Kansas Cancer Center", label: "The University of Kansas Cancer Center" },
+    //     { value: "The Children's Mercy Hospital", label: "The Children's Mercy Hospital" },
+    //     { value: "Barnes - Jewish Hospital", label: "Barnes - Jewish Hospital" },
+    //     { value: "Baylor University Medical Center", label: "Baylor University Medical Center" },
+    //     { value: "Mayo Clinic CAR-T Cell Therapy Program: Rochester", label: "Mayo Clinic CAR-T Cell Therapy Program: Rochester" },
+    //     { value: "University of Minnesota Masonic Children's Hospital", label: "University of Minnesota Masonic Children's Hospital" },
+    //     { value: "", label: "" },
+
+    // ];
+
+    // const Payer = [
+    //     { value: "Aetna", label: "Aetna" },
+    //     { value: "Bluecross Blueshield", label: "Bluecross Blueshield" },
+    //     { value: "Cigna", label: "Cigna" },
+    //     { value: "Kaiser Permanente", label: "Kaiser Permanente" },
+    //     { value: "United Health Group", label: "United Health Group" },
+    // ];
+
     const inputStyle = {
       marginLeft: theme.spacing(5),
       flex: 1,
@@ -188,7 +189,7 @@ class PatientFormComponent extends Component {
         break;
 
       case 'PatientAppForm':
-        content = <PatientAppForm />;
+        content =  <Container maxWidth='lg'><PatientAppForm /> </Container> ;
         break;
 
       default:
@@ -208,7 +209,7 @@ class PatientFormComponent extends Component {
                   <Typography variant="h5">
                     Health Care Practitioner
                   </Typography>
-                    <div style={searchStyle}>
+                  <div style={searchStyle}>
                     <div style={searchIcon}>
                       <SearchIcon />
                     </div>
@@ -291,14 +292,11 @@ class PatientFormComponent extends Component {
                     Copyright © '20 Novartis NTO Blockchain. All rights reserved.
               </Typography>
                 </Toolbar>
-
               </BottomBar>
-            </div>
 
-            <Paper style={paperStyle} elevation={0}>
-              <Container >
-                {content}
-              </Container>
+            </div>
+            <Paper style={paperStyle} elevation={3}>
+              {content}
             </Paper>
           </ThemeProvider>
         </div>

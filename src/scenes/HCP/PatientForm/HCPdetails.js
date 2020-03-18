@@ -161,7 +161,7 @@ export default function HCPForm() {
         margin="normal"
         value={hospitalContact}
       />
-      <br />
+      ¸<br />
       <br />
       <TextField
         id='hospitalPONumber'
@@ -186,7 +186,6 @@ export default function HCPForm() {
             className: classes.menu
           }
         }}
-
         margin="normal"
         required
       >

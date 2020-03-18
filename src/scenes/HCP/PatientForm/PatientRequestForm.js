@@ -11,6 +11,9 @@ import PayerDetails from './PayerDetails';
 import HCPDetails from './HCPdetails';
 import useHCPState from './../../../hooks/useHCPState';
 import axios from 'axios';
+import Container from '@material-ui/core/Container'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +30,17 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  root1: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 function getSteps() {
   return ['Patient Info', 'HCP Details', 'Payer Details', 'Review & Submit'];
@@ -36,13 +49,13 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <PatientDetails />;
+      return <Container maxWidth='lg'><PatientDetails /> </Container>;
     case 1:
-      return <HCPDetails />;
+      return <Container maxWidth='lg'> <HCPDetails /> </Container>;
     case 2:
-      return <PayerDetails />;
+      return <Container maxWidth='lg'>  <PayerDetails />  </Container>;
     case 3:
-      return <ReviewConfirm />;
+      return <Container maxWidth='lg'><ReviewConfirm /> </Container>;
     default:
       return 'Unknown step';
   }
@@ -50,12 +63,11 @@ function getStepContent(step) {
 
 export default function HorizontalLinearStepper() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
   const data = useHCPState();
-
-
 
   const isStepSkipped = step => {
     return skipped.has(step);
@@ -71,37 +83,45 @@ export default function HorizontalLinearStepper() {
     setSkipped(newSkipped);
 
     console.log("Active Step:", activeStep, steps.length);
-
-    if (activeStep === steps.length - 1) {
-      console.log("Your data here : ", { data })
-      axios.post(`http://localhost:5000/api/patientFormCapture`, { data })
+    setOpen(true); 
+    
+    if (activeStep === steps.length-1) {
+     axios.post(`http://localhost:5000/api/patientFormCapture`, { data })
         .then(res => {
           console.log(res.data);
-        })
+          console.log("Your data here : ", { data })
+         // open snackbar to indicate success
+        }) 
         .catch(error => {
           console.log("exception in the post request of Patient Capture form, ", error.response);
           alert("Error in Capture");
         })
+
     }
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
   };
 
-
   const handleReset = () => {
     setActiveStep(0);
   };
 
-
   return (
     <div className={classes.root}>
+
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
- 
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -126,6 +146,11 @@ export default function HorizontalLinearStepper() {
             <Button onClick={handleReset} className={classes.button}>
               Reset
               </Button>
+              <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                  <Alert onClose={handleClose} severity="success">
+                    Request for Kymriah placed successfully! 
+                 </Alert>
+                </Snackbar>
           </div>
         ) : (
             <div>
@@ -138,10 +163,10 @@ export default function HorizontalLinearStepper() {
                   variant="contained"
                   color="primary"
                   onClick={handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                  className={classes.button}>
+                  {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                 </Button>
+             
               </div>
             </div>
           )}

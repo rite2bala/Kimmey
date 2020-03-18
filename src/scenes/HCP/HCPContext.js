@@ -15,7 +15,7 @@ const HCPProvider = (props) => {
         nameOfHCP2: 'Dr. ZZZ YYYY',
         hospitalPONumber: 'Hospital_PO100',
         hospitalContact: "+1-123-456-7890",
-        cityofHCP: "Jersey City",
+        cityofHCP: "Tampa, FL",
         countryofHCP: "USA",
 
         leukapheresisDate: '01/01/2020',
