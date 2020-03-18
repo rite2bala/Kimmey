@@ -140,7 +140,7 @@ export default function HorizontalLinearStepper() {
               Please await and track your status updates visible on the home screen
                 <br />
               <br />
-              <pre>{JSON.stringify(data, 0, 2)}</pre>
+              {/* <pre>{JSON.stringify(data, 0, 2)}</pre> */}
 
             </Typography>
             <Button onClick={handleReset} className={classes.button}>

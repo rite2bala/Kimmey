@@ -90,7 +90,7 @@ export default function ReviewAndConfirm(value, handleChanges) {
             <Typography color="textPrimary" variant='subtitle' component="p">  <b>  Weight:   </b>{patientWeight} </Typography>
             <br />
             <Typography color="textPrimary" variant='subtitle' component="p">  <b>  Hospital ID:  </b> {patientIDinHospital} </Typography>
-          
+
           </div>
         </Grid>
 
@@ -120,7 +120,6 @@ export default function ReviewAndConfirm(value, handleChanges) {
             <br />
             <Typography color="textPrimary" variant='subtitle' component="p"> <b> Reinfusion Location: </b> {reinfusionLocation} </Typography>
           </div>
-
         </Grid>
         <Grid item xs={3}>
           <div>
