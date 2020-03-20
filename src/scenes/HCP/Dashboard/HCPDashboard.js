@@ -2,54 +2,39 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-//import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-//import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { useState } from "react";
-import data from "./data";
-
-//import Tooltip from '@material-ui/core/Tooltip';
-//import FilterListIcon from '@material-ui/icons/FilterList';
-//import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-//import clsx from 'clsx';
-import Container from "@material-ui/core/Container"
-
-import Box from "@material-ui/core/Box"
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from "@material-ui/core/Paper"
-//changes to be made - check the component called   expansion panel
-// can be used in PRF as well
+import Chip from '@material-ui/core/Chip';
+import DoneIcon from '@material-ui/icons/Done';
 
-// can be used instead of
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: "1",
-    margin: theme.spacing(3),
-    maxWidth: 445,
+    margin: theme.spacing(2),
+    maxWidth: 500,
     marginBottom: 15,
     transition: "0.3s cubic-bezier(.47,1.64,.41,.8)",
 
     "&:hover": {
       boxShadow: "0 4px 20px 0 rgba(0,0,0,0.12)",
       transform: "scale(1.04)"
-    }
+    },
   },
   root1: {
     flexGrow: "1",
-left: '1%',
+    left: '1%',
   },
   paper: {
-
     width: "100%",
     margin: "5%",
     textAlign: 'left',
@@ -82,14 +67,20 @@ left: '1%',
   },
 
   apheresisHeader: {
-    backgroundColor: '#f3e5f5',
-    fontSize: 14,
+    backgroundColor: '#e1f5fe',
+  },
+
+  requestHeader: {
+    backgroundColor: '#ffcdd2',
   },
   Apheresistitle: {
     color: '#e1f5fe',
   },
   reinfusionHeader: {
-    backgroundColor: '#e3f2fd',
+    backgroundColor: '#c5e1a5',
+  },
+  manufacturingHeader: {
+    backgroundColor: '#e1f5fe',
   },
   reinfusionTitle: {
     color: '#e1f5fe',
@@ -103,22 +94,20 @@ left: '1%',
 
 }));
 
-export default function RecipeReviewCard() {
-  const [importedData] = useState(data);
-  var data_filter1 = importedData.filter(element => element.PRStatus === "Request : Initiated" ||  element.PRStatus === "Request : Payer Approved" ||  element.PRStatus === "Request : Novartis Approved" );
-  console.log("data_filter1 :", data_filter1);
-  var data_filter2 = importedData.filter(element => element.PRStatus === "Apheresis : In Progress" || element.PRStatus === "Apheresis : Requested"  );
-  console.log("data_filter2 :", data_filter2);
-  var data_filter3 = importedData.filter(element => element.PRStatus === "Manufacturing : Initiated" ||  element.PRStatus === "Manufacturing : In Progress" );
-  console.log("data_filter3 :", data_filter3);
-  var data_filter4 = importedData.filter(element => element.PRStatus === "Manufacturing : Completed" ||  element.PRStatus === "Reinfustion : Initiated" ||  element.PRStatus  ==="Reinfustion : In Progress" ||  element.PRStatus  ==="Reinfustion : Completed" ||  element.PRStatus  ==="Payment: Pending" ||  element.PRStatus  ==="Payment : Completed"||  element.PRStatus  === "Payment : Rejected");
-  console.log("data_filter4 :", data_filter4);
+export default function RecipeReviewCard(props) {
+
+  const importedData = JSON.stringify(props.forms);
+  var importedData1 = JSON.parse(importedData).result;
+  console.log("importedData1::::", JSON.stringify(importedData1));
+  var data_filter1 = importedData1.filter(element => element.payload.status === "Request" && (element.payload.subStatus === "Initiated" || element.payload.subStatus === "Payer Approved" || element.payload.subStatus === "Novartis Approved"));
+  var data_filter2 = importedData1.filter(element => element.payload.status === "Request" && (element.payload.subStatus === "Initiated" || element.payload.subStatus === "Payer Approved" || element.payload.subStatus === "Novartis Approved"));
+  var data_filter3 = importedData1.filter(element => element.payload.status === "Request" && (element.payload.subStatus === "Initiated" || element.payload.subStatus === "Payer Approved" || element.payload.subStatus === "Novartis Approved"));
+  var data_filter4 = importedData1.filter(element => element.payload.status === "Request" && (element.payload.subStatus === "Initiated" || element.payload.subStatus === "Payer Approved" || element.payload.subStatus === "Novartis Approved"));
 
   const classes = useStyles();
 
   const [expandedId, setExpandedId] = React.useState(-1);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleExpandClick = i => {
     setExpandedId(expandedId === i ? false : i);
   };
@@ -128,39 +117,39 @@ export default function RecipeReviewCard() {
 
   const handleClose = event => {
     setAnchorEl(null);
-  };
-  return (
 
-    <Paper className={classes.root1}>
+
+  };
+
+  return (
+    <Paper className={classes.root1} elevation={0}>
       <Grid className={classes.grid} container spacing={3}>
         <Grid item xs={3}>
           <Typography variant='h6' align="center">
-            Request Initated
+            New Requests
           </Typography>
         </Grid>
         <Grid item xs={3}>
           <Typography variant='h6' align="center">
-            Apheresis Schedule
-          </Typography>
-        </Grid>
-        <Grid item xs={3}>
-          <Typography variant='h6'align="center">
-           KYMRIAH Manufacturing - In progress
+            Apheresis Stage
           </Typography>
         </Grid>
         <Grid item xs={3}>
           <Typography variant='h6' align="center">
-            Reinfusion schedules
+            Manufacturing Stage
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant='h6' align="center">
+            Reinfusion Stage
           </Typography>
         </Grid>
       </Grid>
       <Grid className={classes.grid} container spacing={3}>
         <Grid item xs={3}>
           {data_filter1.map((order, i) => (
-            // {importedData.map(order,i)=> (
             <Card className={classes.root} key={order.SNo}>
               <CardHeader
-                  // avatar={<Avatar className={classes.apheresisAvatar} />}
                 action={
                   <div>
                     <IconButton aria-label="settings" aria-haspopup="true"
@@ -181,19 +170,30 @@ export default function RecipeReviewCard() {
                   </div>
 
                 }
-                className={classes.apheresisHeader}
-                title={order.patientFullName}
-                subheader= {order.patientIDInHospital} 
+                className={classes.requestHeader}
+                title={order.payload.patient.patientFullName}
+                subheader={order.payload.patient.patientIDinHospital}
               />
               <CardContent>
-
-                <Typography color="textPrimary" component="p">
-                  <b>Leukapheresis Date: </b>
-                  {order.leukapheresisDate}
+                <Chip
+                  size="small"
+                  label= {<Typography color="white" component="p" align="center">
+                   {order.payload.subStatus}
+                  </Typography> }
+                  color="primary"
+                  deleteIcon={<DoneIcon />}
+                  variant="outlined"
+                />
+                <br />
+                <br />
+                <Typography color="textPrimary" component="p" align="left">
+                  <b>Age:</b> {order.payload.patient.patientAge} Years
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <b>Weight:</b> {order.payload.patient.patientWeight} Kgs
                 </Typography>
                 <Typography color="textPrimary" component="p">
-                  <b>Age:</b> {order.patientAge}, <b>Weight:</b>
-                  {order.patientWeight}
+                  <b>Leukapheresis Date: </b>
+                  {order.payload.apheresisCenter.leukapheresisDate}
                 </Typography>
               </CardContent>
               <div>
@@ -211,21 +211,21 @@ export default function RecipeReviewCard() {
                 <CardContent>
                   {/*  <Typography paragraph>{order.SNo}</Typography>*/}
                   <Typography paragraph>
-                    <b> Hospital Name :</b> {order.hospitalName}
+                    <b> Hospital Name :</b> {order.payload.hcpDemographics.nameOfHospital}
                   </Typography>
                   <Typography paragraph>
-                    <b> Name of Doctor :</b> {order.nameOfHCP}
+                    <b> Name of Doctor :</b> {order.payload.hcpDemographics.nameOfHospital}
                     <br />
-                    <b> Name of Doctor 2:</b> {order.nameOfHCP2}
+                    <b> Name of Doctor 2:</b> {order.payload.hcpDemographics.nameOfHospital2}
                     <br />
                   </Typography>
                   <Typography paragraph>
-                    <b> Payer Name:</b> {order.payerName} <br />
-                    <b> Payer Appproval ID:</b> {order.payerApprovalNumber}
+                    <b> Payer Name:</b> {order.payload.payer} <br />
+                    <b> Payer Appproval ID:</b> {order.payload.payerDetails.payerApprovalNumber}
                   </Typography>
                   <Typography paragraph>
                     <b> Cryopreserved Leukapheresis Location:</b>{" "}
-                    {order.cryoPreservedLeukapheresisLocation}{" "}
+                    {order.payload.apheresisCenter.cryoPreservedLeukapheresisLocation}{" "}
                   </Typography>
                 </CardContent>
               </Collapse>
@@ -234,10 +234,8 @@ export default function RecipeReviewCard() {
         </Grid>
         <Grid item xs={3}>
           {data_filter2.map((order, i) => (
-            // {importedData.map(order,i)=> (
             <Card className={classes.root} key={order.SNo}>
               <CardHeader
-                // avatar={<Avatar className={classes.apheresisAvatar} />}
                 action={
                   <div>
                     <IconButton aria-label="settings" aria-haspopup="true"
@@ -259,49 +257,61 @@ export default function RecipeReviewCard() {
 
                 }
                 className={classes.apheresisHeader}
-                title={order.patientFullName}
-                subheader={order.patientIDInHospital}
+                title={order.payload.patient.patientFullName}
+                subheader={order.payload.patient.patientIDinHospital}
               />
               <CardContent>
-
-                <Typography color="textPrimary" component="p">
-                  <b>Leukapheresis Date: </b>
-                  {order.leukapheresisDate}
+              <Chip
+                  size="small"
+                  label= {<Typography color="white" component="p" align="center">
+                   {order.payload.subStatus}
+                  </Typography> }
+                  color="primary"
+                  deleteIcon={<DoneIcon />}
+                  variant="outlined"
+                />
+                <br />
+                <br />
+                <Typography color="textPrimary" component="p" align="left">
+                  <b>Age:</b> {order.payload.patient.patientAge} Years
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <b>Weight:</b> {order.payload.patient.patientWeight} Kgs
                 </Typography>
                 <Typography color="textPrimary" component="p">
-                  <b>Age:</b> {order.patientAge}, <b>Weight:</b>
-                  {order.patientWeight}
+                  <b>Leukapheresis Date: </b>
+                  {order.payload.apheresisCenter.leukapheresisDate}
                 </Typography>
               </CardContent>
 
               <CardActions disableSpacing>
                 <IconButton
-                  onClick={() => handleExpandClick(i)}
-                  aria-expanded={expandedId === i}
+                  onClick={() => handleExpandClick(3000 + i)}
+                  aria-expanded={expandedId === 3000 + i}
                   aria-label="show more"
                 >
                   <ExpandMoreIcon />
                 </IconButton>
               </CardActions>
-              <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
+              <Collapse in={expandedId === 3000 + i} timeout="auto" unmountOnExit>
                 <CardContent>
+          
                   {/*  <Typography paragraph>{order.SNo}</Typography>*/}
                   <Typography paragraph>
-                    <b> Hospital Name :</b> {order.hospitalName}
+                    <b> Hospital Name :</b> {order.payload.hcpDemographics.nameOfHospital}
                   </Typography>
                   <Typography paragraph>
-                    <b> Name of Doctor :</b> {order.nameOfHCP}
+                    <b> Name of Doctor :</b> {order.payload.hcpDemographics.nameOfHospital}
                     <br />
-                    <b> Name of Doctor 2:</b> {order.nameOfHCP2}
+                    <b> Name of Doctor 2:</b> {order.payload.hcpDemographics.nameOfHospital2}
                     <br />
                   </Typography>
                   <Typography paragraph>
-                    <b> Payer Name:</b> {order.payerName} <br />
-                    <b> Payer Appproval ID:</b> {order.payerApprovalNumber}
+                    <b> Payer Name:</b> {order.payload.payer} <br />
+                    <b> Payer Appproval ID:</b> {order.payload.payerDetails.payerApprovalNumber}
                   </Typography>
                   <Typography paragraph>
                     <b> Cryopreserved Leukapheresis Location:</b>{" "}
-                    {order.cryoPreservedLeukapheresisLocation}{" "}
+                    {order.payload.apheresisCenter.cryoPreservedLeukapheresisLocation}{" "}
                   </Typography>
                 </CardContent>
               </Collapse>
@@ -310,10 +320,8 @@ export default function RecipeReviewCard() {
         </Grid>
         <Grid item xs={3}>
           {data_filter3.map((order, i) => (
-            // {importedData.map(order,i)=> (
             <Card className={classes.root} key={order.SNo}>
               <CardHeader
-                // avatar={<Avatar className={classes.reinfusionAvatar} />}
                 action={
                   <div>
                     <IconButton aria-label="settings" aria-haspopup="true"
@@ -334,22 +342,30 @@ export default function RecipeReviewCard() {
                   </div>
 
                 }
-                className={classes.reinfusionHeader}
-                title={order.patientFullName}
-                subheader={order.patientIDInHospital}
+                className={classes.manufacturingHeader}
+                title={order.payload.patient.patientFullName}
+                subheader={order.payload.patient.patientIDinHospital}
               />
               <CardContent>
+              <Chip
+                  size="small"
+                  label= {<Typography color="white" component="p" align="center">
+                   {order.payload.subStatus}
+                  </Typography> }
+                  color="primary"
+                  deleteIcon={<DoneIcon />}
+                  variant="outlined"
+                />
+                <br />
+                <br />
+                <Typography color="textPrimary" component="p" align="left">
+                  <b>Age:</b> {order.payload.patient.patientAge} Years
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <b>Weight:</b> {order.payload.patient.patientWeight} Kgs
+                </Typography>
                 <Typography color="textPrimary" component="p">
                   <b>Leukapheresis Date: </b>
-                  {order.leukapheresisDate}
-                </Typography>
-                <Typography color="textPrimary" component="p">
-                  <b>Age:</b> {order.patientAge}, <b>Weight:</b>
-                  {order.patientWeight}
-                </Typography>
-                <Typography color="textPrimary" component="p">
-                  <b>Reinfusion Date: </b>
-                  {order.reinfusionDate}
+                  {order.payload.apheresisCenter.leukapheresisDate}
                 </Typography>
               </CardContent>
 
@@ -371,21 +387,21 @@ export default function RecipeReviewCard() {
                 <CardContent>
                   {/* <Typography paragraph>{order.SNo}</Typography> */}
                   <Typography paragraph>
-                    <b> Hospital Name :</b> {order.hospitalName}
+                    <b> Hospital Name :</b> {order.payload.hcpDemographics.nameOfHospital}
                   </Typography>
                   <Typography paragraph>
-                    <b> Name of Doctor :</b> {order.nameOfHCP}
+                    <b> Name of Doctor :</b> {order.payload.hcpDemographics.nameOfHospital}
                     <br />
-                    <b> Name of Doctor 2:</b> {order.nameOfHCP2}
+                    <b> Name of Doctor 2:</b> {order.payload.hcpDemographics.nameOfHospital2}
                     <br />
                   </Typography>
                   <Typography paragraph>
-                    <b> Payer Name:</b> {order.payerName} <br />
-                    <b> Payer Appproval ID:</b> {order.payerApprovalNumber}
+                    <b> Payer Name:</b> {order.payload.payer} <br />
+                    <b> Payer Appproval ID:</b> {order.payload.payerDetails.payerApprovalNumber}
                   </Typography>
                   <Typography paragraph>
                     <b> Cryopreserved Leukapheresis Location:</b>{" "}
-                    {order.cryoPreservedLeukapheresisLocation}{" "}
+                    {order.payload.apheresisCenter.cryoPreservedLeukapheresisLocation}{" "}
                   </Typography>
 
                   <Typography paragraph>
@@ -398,10 +414,8 @@ export default function RecipeReviewCard() {
         </Grid>
         <Grid item xs={3}>
           {data_filter4.map((order, i) => (
-            // {importedData.map(order,i)=> (
             <Card className={classes.root} key={order.SNo}>
               <CardHeader
-                // avatar={<Avatar className={classes.reinfusionAvatar} />}
                 action={
                   <div>
                     <IconButton aria-label="settings" aria-haspopup="true"
@@ -423,21 +437,29 @@ export default function RecipeReviewCard() {
 
                 }
                 className={classes.reinfusionHeader}
-                title={order.patientFullName}
-                subheader={order.patientIDInHospital}
+                title={order.payload.patient.patientFullName}
+                subheader={order.payload.patient.patientIDinHospital}
               />
               <CardContent>
+              <Chip
+                  size="small"
+                  label= {<Typography color="white" component="p" align="center">
+                   {order.payload.subStatus}
+                  </Typography> }
+                  color="primary"
+                  deleteIcon={<DoneIcon />}
+                  variant="outlined"
+                />
+                <br />
+                <br />
+                <Typography color="textPrimary" component="p" align="left">
+                  <b>Age:</b> {order.payload.patient.patientAge} Years
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <b>Weight:</b> {order.payload.patient.patientWeight} Kgs
+                </Typography>
                 <Typography color="textPrimary" component="p">
                   <b>Leukapheresis Date: </b>
-                  {order.leukapheresisDate}
-                </Typography>
-                <Typography color="textPrimary" component="p">
-                  <b>Age:</b> {order.patientAge}, <b>Weight:</b>
-                  {order.patientWeight}
-                </Typography>
-                <Typography color="textPrimary" component="p">
-                  <b>Reinfusion Date: </b>
-                  {order.reinfusionDate}
+                  {order.payload.apheresisCenter.leukapheresisDate}
                 </Typography>
               </CardContent>
 
@@ -459,21 +481,21 @@ export default function RecipeReviewCard() {
                 <CardContent>
                   {/* <Typography paragraph>{order.SNo}</Typography> */}
                   <Typography paragraph>
-                    <b> Hospital Name :</b> {order.hospitalName}
+                    <b> Hospital Name :</b> {order.payload.hcpDemographics.nameOfHospital}
                   </Typography>
                   <Typography paragraph>
-                    <b> Name of Doctor :</b> {order.nameOfHCP}
+                    <b> Name of Doctor :</b> {order.payload.hcpDemographics.nameOfHospital}
                     <br />
-                    <b> Name of Doctor 2:</b> {order.nameOfHCP2}
+                    <b> Name of Doctor 2:</b> {order.payload.hcpDemographics.nameOfHospital2}
                     <br />
                   </Typography>
                   <Typography paragraph>
-                    <b> Payer Name:</b> {order.payerName} <br />
-                    <b> Payer Appproval ID:</b> {order.payerApprovalNumber}
+                    <b> Payer Name:</b> {order.payload.payer} <br />
+                    <b> Payer Appproval ID:</b> {order.payload.payerDetails.payerApprovalNumber}
                   </Typography>
                   <Typography paragraph>
                     <b> Cryopreserved Leukapheresis Location:</b>{" "}
-                    {order.cryoPreservedLeukapheresisLocation}{" "}
+                    {order.payload.apheresisCenter.cryoPreservedLeukapheresisLocation}{" "}
                   </Typography>
 
                   <Typography paragraph>

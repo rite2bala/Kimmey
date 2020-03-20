@@ -49,7 +49,10 @@ export default function PayerDetails() {
   const classes = useStyles();
 
   const {
-    payerApprovalNumber, setpayerApprovalNumber, payerName, setpayerName } = useHCPState();
+    payer,  
+    setpayerName,
+    setpayerApprovalNumber,
+  } = useHCPState();
 
   const payerList = [
     { value: "Aetna", label: "Aetna" },
@@ -78,7 +81,7 @@ export default function PayerDetails() {
         select
 
         className={classes.textField}
-        value={payerName}
+        value={payer.payerName}
         onChange={handleChange("payerName")}
         SelectProps={{
           MenuProps: {
@@ -96,7 +99,6 @@ export default function PayerDetails() {
         ))}
       </TextField>
 
-
       <TextField
         id="payerApprovalNumber"
         placeholder="Optional"
@@ -104,7 +106,7 @@ export default function PayerDetails() {
         className={classes.textField}
         onChange={handleChange("payerApprovalNumber")}
         margin="normal"
-        value={payerApprovalNumber}
+        value={payer.payerApprovalNumber}
       />
       <br />
 

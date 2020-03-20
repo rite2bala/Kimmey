@@ -44,11 +44,12 @@ const useStyles = makeStyles(theme => ({
 export default function PatientForm(value, handleChanges) {
   const classes = useStyles();
 
-  const { 
-    patientFullName, setPatientFullName, 
-    patientAge, setPatientAge, 
-    patientWeight, setPatientWeight,
-    patientIDinHospital, setpatientIDinHospital,
+  const {
+    patient,
+    setPatientFullName,
+    setPatientAge,
+    setPatientWeight,
+    setpatientIDinHospital,
   } = useHCPState();
 
   const handleChange = name => event => {
@@ -74,7 +75,7 @@ export default function PatientForm(value, handleChanges) {
           id="patientFullName"
           className={classes.textField}
           onChange={handleChange("patientFullName")}
-          value={patientFullName}
+          value={patient.patientFullName}
           margin="normal"
         />
         <TextField
@@ -83,7 +84,7 @@ export default function PatientForm(value, handleChanges) {
           id="patientAge"
           className={classes.textField1}
           onChange={handleChange("patientAge")}
-          value={patientAge}
+          value={patient.patientAge}
           margin="normal"
         />
         <TextField
@@ -92,7 +93,7 @@ export default function PatientForm(value, handleChanges) {
           id="patientWeight"
           className={classes.textField1}
           onChange={handleChange("patientWeight")}
-          value={patientWeight}
+          value={patient.patientWeight}
           margin="normal"
         />
         <TextField
@@ -101,7 +102,7 @@ export default function PatientForm(value, handleChanges) {
           id="patientIDinHospital"
           className={classes.textField1}
           onChange={handleChange("patientIDinHospital")}
-          value={patientIDinHospital}
+          value={patient.patientIDinHospital}
           margin="normal"
         />
         <br />

@@ -27,6 +27,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Container from '@material-ui/core/Container';
 import PatientAppForm from './PatientRequestForm';
 import Dashboard from './../Dashboard/HCPDashboard';
+import axios from 'axios';
+import useHCPState from './../../../hooks/useHCPState';
+import image from './../../../assets/NovartisLogo.png';
 
 
 import { HCPProvider } from '../HCPContext';
@@ -38,9 +41,35 @@ class PatientFormComponent extends Component {
 
     this.state = {
       open: false,
+      formsData : "",
+    };
+    this.loadDashboardData = this.loadDashboardData.bind(this);
 
-    }
   }
+
+  componentDidMount() {
+    this.loadDashboardData();
+  }
+
+  async loadDashboardData() {     
+    var requestData = {'hcp':'Alice'};
+    var forms = await axios.post(`http://localhost:5000/api/patientFormQuery`, {requestData} )
+      .then(function (res) {
+        console.log("output ::", JSON.stringify(res.data));
+        return(res.data);
+      })
+      .catch(error => {
+        console.log("exception in the post request of Patient form query, ", error.response);
+//        alert("Error in Capture");
+      })
+      console.log("output2 ::", JSON.stringify(forms));
+      //useHCPState.setHcpPatientForms(JSON.stringify(forms));
+      this.setState({formsData: forms});
+
+  }
+
+
+
   handleToggle = () => this.setState({ open: !this.state.open });
 
   showPatientAppForm = () => {
@@ -49,6 +78,8 @@ class PatientFormComponent extends Component {
 
   showDashboard = () => {
     this.setState({ show: 'Dashboard', open: false });
+
+   
   };
 
   render() {
@@ -64,8 +95,8 @@ class PatientFormComponent extends Component {
       justifyContent: 'center',
       top: '1%',
       height: '7%',
-      left: '1%',
-      width: "98%",
+     // left: '1%',
+      width: "100%",
 
     };
 
@@ -130,8 +161,6 @@ class PatientFormComponent extends Component {
       justifyContent: 'center',
     }
 
-
-
     //   const HCP = [
     //     { value: "John Hopkins All Childeren's hospital", label: "John Hopkins All Childeren's hospital" },
     //     { value: "The University of Kansas Cancer Center", label: "The University of Kansas Cancer Center" },
@@ -185,11 +214,11 @@ class PatientFormComponent extends Component {
     switch (this.state.show) {
 
       case 'Dashboard':
-        content = <Dashboard />;
+        content = <Dashboard forms={this.state.formsData}/>;
         break;
 
       case 'PatientAppForm':
-        content =  <Container maxWidth='lg'><PatientAppForm /> </Container> ;
+        content = <Container maxWidth='lg'><PatientAppForm /> </Container>;
         break;
 
       default:
@@ -206,6 +235,8 @@ class PatientFormComponent extends Component {
               <AppBar primary="primary" style={appBarStyle}>
 
                 <Toolbar style={toolBarStyle}>
+                  {/* <img src={image} width="50" height="30" />
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
                   <Typography variant="h5">
                     Health Care Practitioner
                   </Typography>
@@ -214,7 +245,7 @@ class PatientFormComponent extends Component {
                       <SearchIcon />
                     </div>
                     <InputBase
-                      placeholder="Batch ID"
+                      placeholder="Patient Request ID"
                       inputProps={{ 'aria-label': 'search' }}
                       style={inputStyle}
                     />
@@ -295,7 +326,7 @@ class PatientFormComponent extends Component {
               </BottomBar>
 
             </div>
-            <Paper style={paperStyle} elevation={3}>
+            <Paper style={paperStyle} elevation={0}>
               {content}
             </Paper>
           </ThemeProvider>

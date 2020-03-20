@@ -82,16 +82,17 @@ export default function HCPForm() {
   });
 
   const {
-    nameOfHCP, setnameOfHCP,
-    nameOfHCP2, setnameOfHCP2,
-    hospitalPONumber, sethospitalPONumber,
-    hospitalContact, sethospitalContact,
-    cityofHCP, setcityofHCP,
+    hcp,
+    setnameOfHCP,
+    setnameOfHCP2,
+    sethospitalPONumber,
+    sethospitalContact,
+    setcityofHCP,
     setcountryofHCP,
-    leukapheresisDate, setleukapheresisDate,
-    setleukapheresisLocation, leukapheresisLocation,
-    cryoPreservedLeukapheresisLocation, setcryoPreservedLeukapheresisLocation,
-    reinfusionLocation, setreinfusionLocation,
+    setleukapheresisDate,
+    setleukapheresisLocation,
+    setcryoPreservedLeukapheresisLocation,
+    setreinfusionLocation,  
   } = useHCPState();
 
 
@@ -125,7 +126,6 @@ export default function HCPForm() {
     if (name === "cryoPreservedLeukapheresisLocation") {
       setcryoPreservedLeukapheresisLocation(event.target.value);
     }
-
     if (name === "reinfusionLocation") {
       setreinfusionLocation(event.target.value);
     }
@@ -142,7 +142,7 @@ export default function HCPForm() {
         id="nameOfHCP"
         className={classes.textField}
         onChange={handleChange("nameOfHCP")}
-        value={nameOfHCP}
+        value={hcp.nameOfHCP}
         margin="normal" />
 
       <TextField
@@ -150,7 +150,7 @@ export default function HCPForm() {
         label="Second HCP Name"
         className={classes.textField}
         onChange={handleChange("nameOfHCP2")}
-        value={nameOfHCP2}
+        value={hcp.nameOfHCP2}
         margin="normal" />
       <TextField
         label="Hospital Contact"
@@ -159,7 +159,7 @@ export default function HCPForm() {
         onChange={handleChange("hospitalContact")}
         id='hospitalContact'
         margin="normal"
-        value={hospitalContact}
+        value={hcp.hospitalContact}
       />
       ¸<br />
       <br />
@@ -169,9 +169,8 @@ export default function HCPForm() {
         label="Hospital PO Number"
         onChange={handleChange("hospitalPONumber")}
         margin="normal"
-        value={hospitalPONumber}
+        value={hcp.hospitalPONumber}
       />
-
 
       <TextField
         required
@@ -179,7 +178,7 @@ export default function HCPForm() {
         id="cityofHCP"
         select
         className={classes.textField}
-        value={cityofHCP}
+        value={hcp.cityofHCP}
         onChange={handleChange("cityofHCP")}
         SelectProps={{
           MenuProps: {
@@ -204,7 +203,7 @@ export default function HCPForm() {
         onChange={handleChange("leukapheresisDate")}
         margin="normal"
         id="leukapheresisDate"
-        value={leukapheresisDate}
+        value={hcp.leukapheresisDate}
         SelectProps={{
           MenuProps: {
             className: classes.menu
@@ -222,7 +221,7 @@ export default function HCPForm() {
         id="leukapheresisLocation"
         select
         className={classes.textField}
-        value={leukapheresisLocation}
+        value={hcp.leukapheresisLocation}
         onChange={handleChange("leukapheresisLocation")}
         SelectProps={{
           MenuProps: {
@@ -247,7 +246,7 @@ export default function HCPForm() {
         onChange={handleChange("cryoPreservedLeukapheresisLocation")}
         margin="normal"
         id='cryoPreservedLeukapheresisLocation'
-        value={cryoPreservedLeukapheresisLocation}
+        value={hcp.cryoPreservedLeukapheresisLocation}
       />
       <br />
       <br />
@@ -258,7 +257,7 @@ export default function HCPForm() {
         select
 
         className={classes.textField}
-        value={reinfusionLocation}
+        value={hcp.reinfusionLocation}
         onChange={handleChange("reinfusionLocation")}
         SelectProps={{
           MenuProps: {

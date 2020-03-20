@@ -49,10 +49,7 @@ const useStyles = makeStyles(theme => ({
 export default function ReviewAndConfirm(value, handleChanges) {
   const classes = useStyles();
 
-  const { patientFullName, patientWeight, hospitalPONumber, nameOfHCP2, hospitalContact, cityofHCP, leukapheresisDate,
-    leukapheresisLocation, cryoPreservedLeukapheresisLocation,
-    reinfusionLocation, payerName, payerApprovalNumber,
-    nameOfHCP, patientIDinHospital, patientAge } = useHCPState();
+  const { patient, hcp, payer } = useHCPState();
 
   //const values = useHCPState();
   //   <Typography color="textPrimary" component="p">
@@ -83,28 +80,28 @@ export default function ReviewAndConfirm(value, handleChanges) {
 
         <Grid item xs={3}>
           <div>
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b>  Name: </b> {patientFullName} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b>  Name: </b> {patient.patientFullName} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b>  Age:  </b> {patientAge} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b>  Age:  </b> {patient.patientAge} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p">  <b>  Weight:   </b>{patientWeight} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p">  <b>  Weight:   </b>{patient.patientWeight} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p">  <b>  Hospital ID:  </b> {patientIDinHospital} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p">  <b>  Hospital ID:  </b> {patient.patientIDinHospital} </Typography>
 
           </div>
         </Grid>
 
         <Grid item xs={3}>
           <div>
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b> HCP Name: </b> {nameOfHCP} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b> HCP Name: </b> {hcp.nameOfHCP} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Second HCP Name: </b> {nameOfHCP2} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Second HCP Name: </b> {hcp.nameOfHCP2} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b> City: </b> {cityofHCP} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b> City: </b> {hcp.cityofHCP} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Contact: </b> {hospitalContact} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Contact: </b> {hcp.hospitalContact} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Hospital PO Number: </b> {hospitalPONumber} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Hospital PO Number: </b> {hcp.hospitalPONumber} </Typography>
 
           </div>
         </Grid>
@@ -112,21 +109,21 @@ export default function ReviewAndConfirm(value, handleChanges) {
         <Grid item xs={3}>
           <div>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Leukapheresis Date: </b> {leukapheresisDate} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Leukapheresis Date: </b> {hcp.leukapheresisDate} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Leukapheresis Location:  </b> {leukapheresisLocation} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Leukapheresis Location:  </b> {hcp.leukapheresisLocation} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Cryo-preserved Location: </b> {cryoPreservedLeukapheresisLocation} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Cryo-preserved Location: </b> {hcp.cryoPreservedLeukapheresisLocation} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Reinfusion Location: </b> {reinfusionLocation} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b> Reinfusion Location: </b> {hcp.reinfusionLocation} </Typography>
           </div>
         </Grid>
         <Grid item xs={3}>
           <div>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p">  <b>Payer Name:</b>   {payerName} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p">  <b>Payer Name:</b>   {payer.payerName} </Typography>
             <br />
-            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Payer Approval Number:</b>  {payerApprovalNumber} </Typography>
+            <Typography color="textPrimary" variant='subtitle' component="p"> <b>Payer Approval Number:</b>  {payer.payerApprovalNumber} </Typography>
           </div>
         </Grid>
       </Grid>

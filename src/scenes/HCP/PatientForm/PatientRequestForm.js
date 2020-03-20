@@ -14,6 +14,7 @@ import axios from 'axios';
 import Container from '@material-ui/core/Container'
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import Paper from "@material-ui/core/Paper"
 
 
 const useStyles = makeStyles(theme => ({
@@ -49,13 +50,13 @@ function getSteps() {
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <Container maxWidth='lg'><PatientDetails /> </Container>;
+      return <PatientDetails /> ;
     case 1:
-      return <Container maxWidth='lg'> <HCPDetails /> </Container>;
+      return <HCPDetails />;
     case 2:
-      return <Container maxWidth='lg'>  <PayerDetails />  </Container>;
+      return  <PayerDetails /> ;
     case 3:
-      return <Container maxWidth='lg'><ReviewConfirm /> </Container>;
+      return <ReviewConfirm /> ;
     default:
       return 'Unknown step';
   }
@@ -67,7 +68,11 @@ export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const steps = getSteps();
-  const data = useHCPState();
+  const {
+    patient,
+    hcp,
+    payer
+  } = useHCPState();
 
   const isStepSkipped = step => {
     return skipped.has(step);
@@ -86,17 +91,14 @@ export default function HorizontalLinearStepper() {
     setOpen(true);
 
     if (activeStep === steps.length - 1) {
-      axios.post(`http://localhost:5000/api/patientFormCapture`, { data })
+      axios.post(`http://localhost:5000/api/patientFormCapture`, { patient, hcp, payer })
         .then(res => {
           console.log(res.data);
-          console.log("Your data here : ", { data })
-          // open snackbar to indicate success
         })
         .catch(error => {
           console.log("exception in the post request of Patient Capture form, ", error.response);
           alert("Error in Capture");
         })
-
     }
   };
 
@@ -116,7 +118,8 @@ export default function HorizontalLinearStepper() {
   };
 
   return (
-    <div className={classes.root}>
+    //<div className={classes.root}>
+    <Paper className={classes.root} elevation={3}>
 
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
@@ -140,7 +143,6 @@ export default function HorizontalLinearStepper() {
               Please await and track your status updates visible on the home screen
                 <br />
               <br />
-              {/* <pre>{JSON.stringify(data, 0, 2)}</pre> */}
 
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
@@ -171,6 +173,6 @@ export default function HorizontalLinearStepper() {
             </div>
           )}
       </div>
-    </div>
+    </Paper>
   );
 }
